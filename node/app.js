@@ -4,7 +4,7 @@ var path = require('path');
 var app = express();
 
 
-app.get('/', function(req,resp){
+app.get('/node', function(req,resp){
     resp.sendFile(path.join(__dirname+'/../html/index.html'));
 });
 
