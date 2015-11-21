@@ -17,6 +17,9 @@ $( document ).ready(function() {
   $(".lightbox").click(function(){
     $(this).css("display","none");
   });
+  $(".closeButton").click(function(){
+    $(".lightbox").css("display","none");
+  });
   $(window).scroll(function() {
     if ($(document).scrollTop() > 50) {
       $('.title').animate({fontSize:"30px"},{ duration: 50, queue: false, complete: function() { $('.header').animate({height:"40px"},{ duration: 200, queue: false }); } });
