@@ -215,6 +215,7 @@ overflow-x: hidden;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  width: 95%;
 }
 .productPage{
     position:fixed;
@@ -229,16 +230,13 @@ overflow-x: hidden;
     z-index: 12;
     box-shadow:3px 2px 15px rgb(21,164,160);
     padding: 30px;
-    overflow: none;
+    
 }
+
 .productPageTitle{
     font-size: 40px;
 }
-.selectAmount{
-    width: 100px;
-    background: white;
-    -webkit-appearance: none;
-}
+
 
 .sendToFriend{
     width: 200px;
@@ -251,8 +249,23 @@ overflow-x: hidden;
     margin-top: 10px;
     font-size: 18px;
 }
-@media (max-width: 1400px) {
 
+.closeButton{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+ -webkit-transition: -webkit-transform .8s ease-in-out;
+  transition: transform .8s ease-in-out;
+}
+.closeButton:hover {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+@media (max-width: 995px) {
+    .productPageImage{
+        display: none;
+    }
 }
 
 
