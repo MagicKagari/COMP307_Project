@@ -12,8 +12,8 @@ router.get('/', function(req,resp){
 });
 
 router.get('/product/:product_id', product.getProduct);
-router.get('/product/img/:product_id', product.getProductImg);
-router.get('/getAllProduct', products,getAllProduct);
+router.get('/product/img/:img_name', product.getProductImg);
+router.get('/getAllProduct', product.getAllProduct);
 
 
 //start server listen on /node
