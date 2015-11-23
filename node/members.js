@@ -52,7 +52,5 @@ exports.getMemberInfo = function(req, resp){
     database:'ProjectDB'
   });
   var userid = req.body.userid;
-  var sessionid = req.body.sessionid;
-
-
+  var query = "SELECT * FROM MembersDetails WHERE userID='"+userid+"'";
 };

@@ -34,9 +34,9 @@ router.get('/img/:name',html.getImg);
 router.get('/css/:name',html.getCss);
 
 //routers for handel product
+router.get('/product/getAllProduct', product.getAllProduct);
 router.get('/product/:product_id', product.getProduct);
 router.get('/product/img/:img_name', product.getProductImg);
-router.get('/product/getAllProduct', product.getAllProduct);
 
 //TODO: add session validation middleware
 //routers for handel members
