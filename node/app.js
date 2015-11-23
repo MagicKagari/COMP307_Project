@@ -7,6 +7,7 @@ var router = express.Router();
 
 var product = require('./product.js');
 var members = require('./members.js');
+var gift = require('./gift.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +34,8 @@ router.get('/product/img/:img_name', product.getProductImg);
 router.get('/getAllProduct', product.getAllProduct);
 
 router.post('/members/register', members.register);
+
+router.post('/gifts/sendGift', gift.sendGift);
 
 app.use('/node', router);
 var port = 1337;
