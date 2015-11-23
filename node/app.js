@@ -25,9 +25,47 @@ app.use(function(req, res, next) {
     next();
 });
 
-router.get('/', function(req,resp){
-    resp.sendFile(path.join(__dirname+'/../html/index.html'));
+//return index html
+router.get('/',function(req, resp){
+  resp.sendFile(path.join(__dirname+'/../html/index.html'));
 });
+
+router.get('/:name', function(req,resp){
+  try{
+    var name = req.params.name;
+    resp.sendFile(path.join(__dirname+'/../html/'+name));
+  }catch(e){
+      console.log(e);
+  }
+});
+
+router.get('/js/:name',function(req,resp){
+  try{
+    var name = req.params.name;
+    resp.sendFile(path.join(__dirname+'/../html/js/'+name));
+  }catch(e){
+      console.log(e);
+  }
+});
+
+router.get('/img/:name',function(req,resp){
+  try{
+    var name = req.params.name;
+    resp.sendFile(path.join(__dirname+'/../html/img/'+name));
+  }catch(e){
+      console.log(e);
+  }
+});
+
+router.get('/css/:name',function(req,resp){
+  try{
+    var name = req.params.name;
+    resp.sendFile(path.join(__dirname+'/../html/css/'+name));
+  }catch(e){
+      console.log(e);
+  }
+});
+
 
 router.get('/product/:product_id', product.getProduct);
 router.get('/product/img/:img_name', product.getProductImg);
