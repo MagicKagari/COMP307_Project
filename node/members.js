@@ -1,0 +1,36 @@
+//function related to members
+
+
+//function that perform registration
+//accept JSON in {username = "foo", password = "foo2" } format
+//return JSON in {result = true, info = ""} or {result = false, info = "why fail"}
+exports.register = function(req, resp){
+  var mysql = require('mysql');
+  var connection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'comp307project',
+    database:'ProjectDB'
+  });
+  var username = req.body.username;
+  var password = req.body.password;
+  var query = "SELECT * FROM Members WHERE username='"+username+"'";
+  connection.query(query, function(err, rows, fields){
+    if(err) throw err;
+    if(rows.length == 0){
+      //perform insert
+      connection.query("SELECT * FROM Members", function(err, rows, fields){
+        if(err) throw err;
+        var next_id = rows.length + 1;
+        var query = "INSERT INTO Members ( userID, username, password, encryptionKey) VALUES ('"+next_id+"','"+username+"','"+password+"',10)";
+        console.log(query);
+        connection.query(query, function(err, rows, fields){
+          if(err) throw err;
+          resp.send(JSON.stringify({"result":true,"info":"success"}));
+        });
+      });
+    }else{
+      resp.send(JSON.stringify({"result":false,"info":"duplicate username"}));
+    }
+  });
+};
