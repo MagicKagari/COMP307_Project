@@ -8,6 +8,7 @@ var router = express.Router();
 var product = require('./product.js');
 var members = require('./members.js');
 var gift = require('./gift.js');
+var html = require('./html.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,54 +26,23 @@ app.use(function(req, res, next) {
     next();
 });
 
-//return index html
-router.get('/',function(req, resp){
-  resp.sendFile(path.join(__dirname+'/../html/index.html'));
-});
+//routers for handle return of ../html
+router.get('/',html.getIndex);
+router.get('/:name', html.getHtml);
+router.get('/js/:name',html.getJs);
+router.get('/img/:name',html.getImg);
+router.get('/css/:name',html.getCss);
 
-router.get('/:name', function(req,resp){
-  try{
-    var name = req.params.name;
-    resp.sendFile(path.join(__dirname+'/../html/'+name));
-  }catch(e){
-      console.log(e);
-  }
-});
-
-router.get('/js/:name',function(req,resp){
-  try{
-    var name = req.params.name;
-    resp.sendFile(path.join(__dirname+'/../html/js/'+name));
-  }catch(e){
-      console.log(e);
-  }
-});
-
-router.get('/img/:name',function(req,resp){
-  try{
-    var name = req.params.name;
-    resp.sendFile(path.join(__dirname+'/../html/img/'+name));
-  }catch(e){
-      console.log(e);
-  }
-});
-
-router.get('/css/:name',function(req,resp){
-  try{
-    var name = req.params.name;
-    resp.sendFile(path.join(__dirname+'/../html/css/'+name));
-  }catch(e){
-      console.log(e);
-  }
-});
-
-
+//routers for handel product
 router.get('/product/:product_id', product.getProduct);
 router.get('/product/img/:img_name', product.getProductImg);
-router.get('/getAllProduct', product.getAllProduct);
+router.get('/product/getAllProduct', product.getAllProduct);
 
+//TODO: add session validation middleware
+//routers for handel members
 router.post('/members/register', members.register);
 
+//routers for handle gifts
 router.post('/gifts/sendGift', gift.sendGift);
 
 app.use('/node', router);

@@ -40,3 +40,19 @@ exports.register = function(req, resp){
     }
   });
 };
+
+//function for getting user information
+//{userid, sessionid}
+exports.getMemberInfo = function(req, resp){
+  var mysql = require('mysql');
+  var connection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'comp307project',
+    database:'ProjectDB'
+  });
+  var userid = req.body.userid;
+  var sessionid = req.body.sessionid;
+
+
+};
