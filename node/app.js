@@ -44,6 +44,7 @@ router.post('/members/register', members.register);
 
 //routers for handle gifts
 router.post('/gifts/sendGift', gift.sendGift);
+router.post('/gifts/redeemGift', gift.redeemGift);
 
 app.use('/node', router);
 var port = 1337;

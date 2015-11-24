@@ -53,4 +53,5 @@ exports.getMemberInfo = function(req, resp){
   });
   var userid = req.body.userid;
   var query = "SELECT * FROM MembersDetails WHERE userID='"+userid+"'";
+  connection.query()
 };
