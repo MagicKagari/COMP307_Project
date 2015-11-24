@@ -145,3 +145,70 @@ exports.redeemGift = function(req, resp){
     }
   });
 };
+
+//function that cancel a gift and transfer as credits
+//{userid, giftid}
+exports.cancelGift = function(req, resp){
+  var mysql = require('mysql');
+  var connection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'comp307project',
+    database:'ProjectDB'
+  });
+
+  var userid = req.body.userid;
+  var giftid = req.body.giftid;
+
+  //check if the gift is user's
+  var query = "SELECT presentList FROM MembersDetails WHERE userID='"+userid+"'";
+  connection.query(query, function(err, rows, fields){
+    if(err) throw err;
+    if(rows.length == 0){
+      console.log('no userid: '+userid);
+      resp.send(JSON.stringify({'result':false,'info':'no such user'}));
+      return;
+    }else{
+      var presents = rows[0].presentList.split(',');
+      if(presents.indexOf(giftid) == -1){
+        console.log( giftid + ' not exists for ' + userid);
+        resp.send(JSON.stringify({'result':false,'info':'no such gift'}));
+        return;
+      }else{
+        //check if the gift is redeemed or not
+        query = "SELECT productID, redeemCheck FROM Gifts WHERE giftID='"+giftid+"'";
+        connection.query(query, function(err, rows, fields){
+          if(err) throw err;
+          if(rows.length == 0){
+            console.log('no giftid; '+giftid);
+            resp.send(JSON.stringify({'result':false, 'info':'no such gift'}));
+            return;
+          }else{
+            var check = rows[0].redeemCheck;
+            var productID = rows[0].productID;
+            if(check != 0){
+              resp.send(JSON.stringify({'result':false,'info':'gift already redeemed'}));
+              return;
+            }else{
+              //redeem the gift, and transfer it to credit
+              query = "UPDATE Gifts SET redeemCheck=1 WHERE giftID='"+giftid+"'";
+              connection.query(query,function(err,rows,fields){
+                if(err) throw err;
+                query = "SELECT price FROM Product WHERE productID='"+productID+"'";
+                connection.query(query, function(err, rows,fields){
+                  if(err) throw err;
+                  var price = rows[0].price;
+                  query = "UPDATE MembersDetails SET credits = credits+'"+price+"' WHERE userID='"+userid+"'";
+                  connection.query(query,function(err, rows, fields){
+                    if(err) throw err;
+                    resp.send(JSON.stringify({'result':false,'info':'gift changed to credit'}));
+                  });
+                });
+              });
+            }
+          }
+        });
+      }
+    }
+  });
+};
