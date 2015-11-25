@@ -10,6 +10,7 @@ $(document).ready(function(){
     var register = {'username':username,'password':password,'address':address};
     $.ajax({
       url:"http://159.203.18.55:1337/node/members/register",
+      //url:'http://localhost:1337/node/members/register',
       type:"POST",
       data: JSON.stringify(register),
       contentType: "application/json; charset=utf-8",
@@ -50,8 +51,5 @@ $(document).ready(function(){
       $("#signup-button").prop("disabled", false);
     }
   });
-
-
-
 
 });

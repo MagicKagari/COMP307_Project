@@ -43,6 +43,7 @@ exports.register = function(req, resp){
 
 //function for getting user information
 //{userid, sessionid}
+//TODO: validate session
 exports.getMemberInfo = function(req, resp){
   var mysql = require('mysql');
   var connection = mysql.createConnection({
@@ -53,5 +54,12 @@ exports.getMemberInfo = function(req, resp){
   });
   var userid = req.body.userid;
   var query = "SELECT * FROM MembersDetails WHERE userID='"+userid+"'";
-  connection.query()
+  connection.query(query, function(err, rows, fields){
+    if(err) throw err;
+    if(rows.length == 0){
+      resp.send(JSON.stringify({"result":false}));
+    }else{
+      resp.send(JSON.stringify(rows[0]));
+    }
+  });
 };

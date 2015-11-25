@@ -1,5 +1,6 @@
 $.ajax({
    url: 'http://159.203.18.55:1337/node/product/getAllProduct',
+   //url:'http://localhost:1337/node/product/getAllProduct',
    data: {
       format: 'string'
    },
@@ -40,7 +41,7 @@ function displayProducts(data) {
           productDescription.className = "productDescription";
           sendBtn.className = "addToCart";
 
-          productImage.setAttribute('src', "node/product/img/"+data[i*4 + col].img);
+          productImage.setAttribute('src', "img/"+data[i*4 + col].img);
           productTitle.innerHTML = data[i*4 + col].productName;
           productDescription.innerHTML = data[i*4 + col].description;
           productPrice.innerHTML = "$"+data[i*4 + col].price;
@@ -80,7 +81,7 @@ function displayProducts(data) {
         productDescription.className = "productDescription";
         sendBtn.className = "addToCart";
 
-        productImage.setAttribute('src', "node/product/img/"+data[(runTimes -1)*4+j].img);
+        productImage.setAttribute('src', "img/"+data[(runTimes -1)*4+j].img);
         productTitle.innerHTML = data[(runTimes -1)*4+j].productName;
         productDescription.innerHTML = data[(runTimes -1)*4+j].description;
         productPrice.innerHTML = "$"+data[(runTimes -1)*4+j].price;
@@ -154,6 +155,11 @@ $( document ).ready(function() {
   });
 
   $(".loginBtn").click(function (){
+    var userid = 1; //TODO: get this one from login success result
+    //use user id to query information
+
+
+
     $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
     $(".password").animate({opacity:0},200,function(){$(".password").css("display","none");});
     $(this).animate({opacity:0},200,function(){$(this).css("display","none");});
