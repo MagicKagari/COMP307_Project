@@ -44,3 +44,13 @@ exports.getCss = function(req,resp){
       console.log(e);
   }
 };
+
+exports.getVendor = function(req, resp){
+  try{
+    var path = require('path');
+    var name = req.params.name;
+    resp.sendFile(path.join(__dirname+'/../html/js/vendor/'+name));
+  }catch(e){
+      console.log(e);
+  }
+};

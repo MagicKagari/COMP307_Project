@@ -32,6 +32,7 @@ router.get('/:name', html.getHtml);
 router.get('/js/:name',html.getJs);
 router.get('/img/:name',html.getImg);
 router.get('/css/:name',html.getCss);
+router.get('/js/vendor/:name', html.getVendor);
 
 //routers for handel product
 router.get('/product/getAllProduct', product.getAllProduct);
