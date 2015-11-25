@@ -1,0 +1,63 @@
+body{
+	padding: 0;
+	margin: 0;
+	overflow: 0;
+}
+
+.frame{
+	width: 100vw;
+	height: 100vh;
+	background: rgb(21,164,160);
+
+}
+.loginForm{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 450px;
+	width: 50%;
+	min-width: 500px;
+	background: white;
+	padding: 40px 30px 30px 70px;
+	transform: translate(-50%, -50%);
+	border-radius: 20px;
+	box-shadow: 0px 0px 10px rgb(16,84,80);
+
+
+}
+.header{
+	position: absolute;
+	width: 100vw;
+	height: 40px;
+	left:0;
+	top: 0;
+	background: white;
+	z-index: 10;
+	font-size: 25px;
+	line-height: 40px;
+	padding-left: 15px;
+}
+.title{
+	font-family: 'Lato', sans-serif;
+	padding-bottom: 10px;
+	margin-top: 0;
+	}
+
+.row{
+	padding-bottom: 15px;
+}
+
+.col-md-6{
+	padding: 0px 2px;
+}
+.col-md-8{
+	padding: 0px 2px;
+}
+
+.col-md-12{
+	padding: 0px 2px;
+}
+
+.signupBtn{
+	margin-top: 20px;
+}

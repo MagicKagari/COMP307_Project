@@ -144,6 +144,10 @@ overflow-x: hidden;
     background: rgba(210,210,210,0.4);
     display: block;
 }
+.signupBtn{
+    margin-top: 10px;
+}
+
 .infoBox{
     margin: 30px;
     padding: 30px;
