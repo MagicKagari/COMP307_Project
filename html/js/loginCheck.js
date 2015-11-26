@@ -44,7 +44,8 @@ function checkit(){
     											}
 
   											}
-												xhttp.open("POST", "http://localhost/php/sessionID.php", true);
+												xhttp.open("POST", "http://159.203.18.55/php/sessionID.php", true);
+  											//xhttp.open("POST", "http://localhost/php/sessionID.php", true);
   											//xhttp.open("POST", "~/COMP307_Project/php/sessionID.php", true);
   											xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 											xhttp.send("jsonAccount="+jsonString);
@@ -56,14 +57,16 @@ function checkit(){
       								}
      							}
   							}
-  						xhttp.open("POST", "http://localhost/php/test.php", true);
-  						xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+								xhttp.open("POST", "http://159.203.18.55/php/test.php", true);
+								//xhttp.open("POST", "http://localhost/php/test.php", true);
+	  						xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					  	xhttp.send("jsonAccount="+jsonString);
   						xhttp.send();
     			}
   			}
-  		xhttp.open("POST", "http://localhost/php/getSharedKey.php", true);
-  		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.open("POST", "http://159.203.18.55/php/getSharedKey.php", true);
+				//xhttp.open("POST", "http://localhost/php/getSharedKey.php", true);
+	  		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	  	xhttp.send("jsonUser="+jsonString);
   		xhttp.send();
 	}
