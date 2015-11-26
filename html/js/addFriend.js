@@ -1,4 +1,4 @@
-function checkit(){
+function checkFriend(){
 	
 	var username = document.getElementById("username").value;
 	var friendname = document.getElementById("friendname").value;
@@ -22,7 +22,7 @@ function checkit(){
 
 					}
   			}
-  		xhttp.open("POST", "~/COMP307_Project/php/addFriend.php", true);
+  		xhttp.open("POST", "http://159.203.18.55/php/addFriend.php", true);
   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("jsonUser="+jsonString);
   		xhttp.send();

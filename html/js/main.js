@@ -106,8 +106,8 @@ function displayProducts(data) {
 
 
 }
-
-$scrolled = false;
+localStorage.setItem("scrolled", false);
+var $scrolled = localStorage.getItem("scrolled");
 
 $( document ).ready(function() {
   //***********************************************
@@ -156,7 +156,7 @@ $( document ).ready(function() {
   });
 
   $(".loginBtn").click(function (){
-    checkit();
+    checkLogin();
     var userid = 1; //TODO: get this one from login success result
     //use user id to query information
     $.ajax({
@@ -178,23 +178,6 @@ $( document ).ready(function() {
         alert(JSON.stringify(error));
       }
     });
-
-    $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
-    $(".password").animate({opacity:0},200,function(){$(".password").css("display","none");});
-    $(this).animate({opacity:0},200,function(){$(this).css("display","none");});
-    $(".signupBtn").animate({opacity:0},200,function(){$(".signupBtn").css("display","none");});
-    $(".loginBox").animate({height:"0px"},200,function(){
-      $(".loginBox").css("display","none");
-      $(".infoBox").css("display","block");
-      $(".infoBox").height(0);
-
-      if($scrolled === false){
-        $(".infoBox").animate({height:$(window).height()-210},400);
-      }
-      else{
-        $(".infoBox").animate({height:$(window).height()-100},400);
-      }
-      });
   });
 
   //*******************************************************************************
