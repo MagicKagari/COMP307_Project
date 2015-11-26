@@ -108,7 +108,6 @@ function displayProducts(data) {
 }
 
 $scrolled = false;
-$animation = false;
 
 $( document ).ready(function() {
   //***********************************************
@@ -201,24 +200,20 @@ $( document ).ready(function() {
   //Animates Header to shrink if page is scrolled and enlarge if page is at the top
   //*******************************************************************************
   $(window).scroll(function() {
-    if ($(document).scrollTop() > 200 && $animation == false) {
-      $animation = true;
+    if ($(document).scrollTop() > 80) {
       $scrolled = true;
       $('.title').animate({fontSize:"30px"},{ duration: 50, queue: false, complete: function() { $('.header').animate({height:"40px"},{ duration: 200, queue: false }); } });
       $('.header').animate({paddingTop:"4px"},{ duration: 100, queue: false });
       $('.sidebar').animate({marginTop:"-110px"},{ duration: 250, queue: false, complete: function(){
-        $animation = false;
       } });
       $(".infoBox").animate({height:$(window).height()-100},50,function(){});
-    } else if($animation == false){
-      $animation = true;
+    } else{
       $scrolled = false;
       $('.title').stop();
       $('.header').stop();
       $('.sidebar').stop();
       $('.infoBox').stop();
       $('.sidebar').animate({marginTop:"0px"},{ duration: 250, queue: false, complete: function(){
-        $animation = false;
       } });
       $('.header').animate({paddingTop:"40px"},{ duration: 100, queue: false });
       $('.title').animate({fontSize:"60px"},{ duration: 50, queue: false });
