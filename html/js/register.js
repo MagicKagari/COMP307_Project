@@ -1,6 +1,6 @@
 //js file to register
 $(document).ready(function(){
-  
+
 
   //signup
   $("#signup-button").click(function(){
@@ -27,7 +27,7 @@ $(document).ready(function(){
                     $(".6").animate({opacity:0},150,function(){
                       $(".loginForm").animate({height:"200px"},300,function(){$(".confirmForm").css("display","block");
           $(".confirmForm").animate({opacity:1},300);});;});});});});});});
-          
+
           }else{
           if(msg.info === "duplicate username")
           {
@@ -86,7 +86,7 @@ $(document).ready(function(){
     else if(this.value !== confirm ){
       $("#signup-message").text("Passwords do not match.");
       $validPassword = false;
-    } 
+    }
     else
     {
       $("#signup-message").text("");

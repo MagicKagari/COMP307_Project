@@ -97,7 +97,7 @@ exports.sendGift = function(req,resp){
       }
     }
   });
-
+  connection.end();
 };
 
 //function that redeem gift
@@ -155,6 +155,7 @@ exports.redeemGift = function(req, resp){
       }
     }
   });
+  connection.end();
 };
 
 //function that cancel a gift and transfer as credits
@@ -222,6 +223,7 @@ exports.cancelGift = function(req, resp){
       }
     }
   });
+  connection.end();
 };
 
 //function that check for a gift using id
@@ -247,4 +249,5 @@ exports.checkGift = function(req, resp){
       });
     }
   });
+  connection.end();
 };
