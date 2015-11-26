@@ -183,27 +183,31 @@ $( document ).ready(function() {
   //*******************************************************************************
   //Animates Header to shrink if page is scrolled and enlarge if page is at the top
   //*******************************************************************************
+  var animating = false;
   $(window).scroll(function() {
-    if ($(document).scrollTop() > 80) {
+    if ($(document).scrollTop() > 200 && animating == false) {
+      animating = true;
       $scrolled = true;
-      $('.title').animate({fontSize:"30px"},{ duration: 50, queue: false, complete: function() { $('.header').animate({height:"40px"},{ duration: 200, queue: false }); } });
+      $('.title').animate({fontSize:"30px"},{ duration: 50, queue: false});
+      $('.header').animate({height:"40px"},{ duration: 200, queue: false });
       $('.header').animate({paddingTop:"4px"},{ duration: 100, queue: false });
-      $('.sidebar').animate({marginTop:"-110px"},{ duration: 250, queue: false, complete: function(){
+      $('.sidebar').animate({marginTop:"-110px"},{ duration: 200, queue: false, complete: function(){
       } });
-      $(".infoBox").animate({height:$(window).height()-100},50,function(){});
-    } else{
+      $(".infoBox").animate({height:$(window).height()-100},{duration: 50, queue: false });
+      setTimeout(function(){animating=false; },200);
+    } else if( animating == false){
+      animating = true;
       $scrolled = false;
       $('.title').stop();
       $('.header').stop();
       $('.sidebar').stop();
       $('.infoBox').stop();
-      $('.sidebar').animate({marginTop:"0px"},{ duration: 250, queue: false, complete: function(){
-      } });
+      $('.sidebar').animate({marginTop:"0px"},{ duration: 200, queue: false });
       $('.header').animate({paddingTop:"40px"},{ duration: 100, queue: false });
       $('.title').animate({fontSize:"60px"},{ duration: 50, queue: false });
       $('.header').animate({height:"150px"},{ duration: 200, queue: false });
-      $(".infoBox").animate({height:$(window).height()-210},200,function(){});
-
+      $(".infoBox").animate({height:$(window).height()-210},{ duration: 50, queue: false });
+      setTimeout(function(){animating=false; },200);
     }
   });
 });
