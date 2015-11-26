@@ -1,4 +1,4 @@
-function checkit(){
+function checkFriend(){
 	
 	var username = document.getElementById("username").value;
 	var friendname = document.getElementById("friendname").value;
@@ -14,15 +14,15 @@ function checkit(){
     			if (xhttp.readyState == 4 && xhttp.status == 200) {
       				 var check= xhttp.responseText;
       				 if(check==0){
-      				 	//SUCCESFULLY ADDED "THE FRIEND NAME" 
+      				 	alert("Added");
       				 }
       				 else{
-      				 	//"THE FRIEND NAME" NOT FOUND
+      				 	alert("Name not found");
       				 }
 
 					}
   			}
-  		xhttp.open("POST", "~/COMP307_Project/php/addFriend.php", true);
+  		xhttp.open("POST", "http://159.203.18.55/php/addFriend.php", true);
   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("jsonUser="+jsonString);
   		xhttp.send();

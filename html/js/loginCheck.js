@@ -1,5 +1,5 @@
 
-function checkit(){
+function checkLogin(){
 
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
@@ -37,10 +37,23 @@ function checkit(){
   											xhttp.onreadystatechange = function() {
   												if (xhttp.readyState == 4 && xhttp.status == 200) {
   													sessionID=xhttp.responseText;
-  													//sessionID=parseInt(sessionID);
   													localStorage.setItem("currentSession", sessionID);
-  													/*Hello, Stanley*/
-  													/*IF THE LOGIN WAS SUCCESFULL*/
+												    $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
+												    $(".password").animate({opacity:0},200,function(){$(".password").css("display","none");});
+												    $(".loginBtn").animate({opacity:0},200,function(){$(this).css("display","none");});
+												    $(".signupBtn").animate({opacity:0},200,function(){$(".signupBtn").css("display","none");});
+												    $(".loginBox").animate({height:"0px"},200,function(){
+													    $(".loginBox").css("display","none");
+													    $(".infoBox").css("display","block");
+													    $(".infoBox").height(0);
+													    var $scrolled = localStorage.getItem("scrolled");
+													    if($scrolled === false){
+													    	$(".infoBox").animate({height:$(window).height()-210},400);
+													    }
+													    else{
+													        $(".infoBox").animate({height:$(window).height()-100},400);
+													    }
+												    });
     											}
 
   											}
@@ -52,6 +65,7 @@ function checkit(){
   											xhttp.send();
       								}
       								else{
+      									alert("Did not work");
       									/*Hello, Stanley*/
       								//IF THE LOGIN WAS NOT SUCCESSFULL
       								}
