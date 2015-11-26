@@ -48,6 +48,7 @@ router.post('/members/getMemberInfo', members.getMemberInfo);
 router.post('/gifts/sendGift', gift.sendGift);
 router.post('/gifts/redeemGift', gift.redeemGift);
 router.post('/gifts/cancelGift', gift.cancelGift);
+router.post('/gifts/checkGift', gift.checkGift);
 
 app.use('/node', router);
 var port = 1337;

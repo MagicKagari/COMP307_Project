@@ -10,22 +10,26 @@ if('undefined' === typeof notification){
 }
 
 //Poll our backend for notifications, set some reasonable timeout for your application
-/*
+
 window.setInterval(function() {
   console.log('poll...');
-  jQuery.ajax({
-    url:"http://159.203.18.55:1337/node/members/getMemberInfo",
-    //url:"http://localhost:1337/node/members/getMemberInfo",
+  $.ajax({
+    url:"http://159.203.18.55:1337/node/gifts/checkGift",
+    //url:"http://localhost:1337/node/gifts/checkGift",
     type:"POST",
     data: JSON.stringify({'userid':1}),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(msg) {
-      Notifier.info("you have a msg",JSON.stringify(msg));
+      if(msg.result){
+          for(var i=0; i<msg.info.length;i++){
+            Notifier.info("New gift for you", "User: " + msg.info[i].fromWhoName + " GiftID: " + msg.info[i].giftID);
+          }
+      }
     }
   });
 }, 5000);    //poll every 5 secs.
-*/
+
 /***********************
 * Notifier.js - Developed by rlemon (rob.lemon@gmail.com) https://github.com/rlemon/Notifier.js
 * Licensed under GNU GPL V3 https://github.com/rlemon/Notifier.js/blob/master/LICENSE

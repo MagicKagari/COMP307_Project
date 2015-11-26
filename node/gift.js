@@ -36,6 +36,13 @@ exports.sendGift = function(req,resp){
     }
   });
 
+  var fromWho_username;
+  query = "SELECT username FROM Members WHERE userID='"+fromWho_id+"'";
+  connection.query(query, function(err, rows, fields){
+    if(err) throw err;
+    if(rows.length > 0) fromWho_username = rows[0].username;
+  });
+
   //deduct credit of fromWho
   query = "SELECT credits FROM MembersDetails WHERE userID='"+fromWho_id+"'";
   console.log(query);
@@ -74,10 +81,14 @@ exports.sendGift = function(req,resp){
               connection.query(query, function(err, rows, fields){
                 if(err) throw err;
                 //insert into gifts
-                query = "INSERT INTO Gifts (giftID, productID, fromWho, toWho, redeemCheck) VALUES ("+gift_id+",'"+product_id+"','"+fromWho_id+"','"+toWho_id+"',0)";
+                query = "INSERT INTO Gifts (giftID, productID, fromWho, toWho, redeemCheck) VALUES ('"+gift_id+"','"+product_id+"','"+fromWho_id+"','"+toWho_id+"',0)";
                 connection.query(query, function(err, rows, fields){
                   if(err) throw err;
-                  resp.send(JSON.stringify({'result':true,'info':''}));
+                  query = "INSERT INTO GiftQueue (userID, giftID, fromWho, fromWhoName) VALUES ('"+toWho_id+"','"+gift_id+"','"+fromWho_id+"','"+fromWho_username+"')";
+                  connection.query(query, function(err, rows, fields){
+                    if(err) throw err;
+                    resp.send(JSON.stringify({'result':true,'info':''}));
+                  });
                 });
               });
             }
@@ -209,6 +220,31 @@ exports.cancelGift = function(req, resp){
           }
         });
       }
+    }
+  });
+};
+
+//function that check for a gift using id
+exports.checkGift = function(req, resp){
+  var mysql = require('mysql');
+  var connection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'comp307project',
+    database:'ProjectDB'
+  });
+  var userid = req.body.userid;
+  var query = "SELECT * FROM GiftQueue WHERE userID='"+userid+"'";
+  connection.query(query, function(err, rows, fields){
+    if(err) throw err;
+    if(rows.length == 0){
+      resp.send(JSON.stringify({'result':false,'info':"oops no gift for you."}));
+    }else{
+      resp.send(JSON.stringify({'result':true,'info':rows}));
+      query = "DELETE FROM GiftQueue WHERE userID='"+userid+"'";
+      connection.query(query, function(err, rows, fields){
+        if(err) throw err;
+      });
     }
   });
 };
