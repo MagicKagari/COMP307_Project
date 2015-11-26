@@ -42,6 +42,7 @@ router.get('/product/img/:img_name', product.getProductImg);
 //TODO: add session validation middleware
 //routers for handel members
 router.post('/members/register', members.register);
+router.post('/members/getMemberInfo', members.getMemberInfo);
 
 //routers for handle gifts
 router.post('/gifts/sendGift', gift.sendGift);

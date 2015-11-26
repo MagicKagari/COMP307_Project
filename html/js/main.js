@@ -159,8 +159,25 @@ $( document ).ready(function() {
   $(".loginBtn").click(function (){
     var userid = 1; //TODO: get this one from login success result
     //use user id to query information
-
-
+    $.ajax({
+      url:"http://159.203.18.55:1337/node/members/getMemberInfo",
+      //url:'http://localhost:1337/node/members/getMemberInfo',
+      type:"POST",
+      data: JSON.stringify({'userid':userid}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function(msg){
+        var ret = msg.result;
+        if(ret){
+          alert(JSON.stringify(msg));
+        }else{
+          alert(msg.info);
+        }
+      },
+      error: function(error){
+        alert(JSON.stringify(error));
+      }
+    });
 
     $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
     $(".password").animate({opacity:0},200,function(){$(".password").css("display","none");});
