@@ -23,7 +23,7 @@ exports.register = function(req, resp){
       connection.query("SELECT * FROM Members", function(err, rows, fields){
         if(err) throw err;
         var next_id = rows.length + 1;
-        var query = "INSERT INTO Members ( userID, username, password, encryptionKey ) VALUES ("+next_id+",'"+username+"','"+password+"',10)";
+        var query = "INSERT INTO Members ( userID, username, password, sharedkey ) VALUES ("+next_id+",'"+username+"','"+password+"',10)";
         console.log(query);
         connection.query(query, function(err, rows, fields){
           if(err) throw err;
