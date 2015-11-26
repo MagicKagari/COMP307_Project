@@ -1,6 +1,6 @@
 <?php
-
-$connect=mysql_connect('localhost','root','comp307project');  
+header('Access-Control-Allow-Origin: *');  
+$connect=mysql_connect('localhost','root','comp307project');
 $DB=mysql_select_db('ProjectDB',$connect);
 
 $query="SELECT * FROM session";

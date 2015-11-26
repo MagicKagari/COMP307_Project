@@ -1,11 +1,13 @@
 <?php
-$connect=mysql_connect('localhost','root','comp307project');  
+header('Access-Control-Allow-Origin: *');  
+
+$connect=mysql_connect('localhost','root','comp307project');
 $DB=mysql_select_db('ProjectDB',$connect);
 
 
 
 $parsed_json = json_decode($_POST["jsonAccount"]);
-$username = $parsed_json->{'username'}; 
+$username = $parsed_json->{'username'};
 $enpassword = $parsed_json->{'password'};
 
 
@@ -55,16 +57,15 @@ function decrypt($str, $n) {
 $compare=strcmp($decryptedPassword,$password);
 if($compare==0){
 //==========================
-    
+
    $x=rand();
    $query3="INSERT INTO Session (userID, sessionID) VALUES ($userID, $x)";
    $result3=mysql_query($query3);
 //=====================
-echo "0";	
+echo "0";
 
 }
 //IF NOT, ECHO 1
-else 
+else
 echo "1";
  ?>
-

@@ -1,10 +1,10 @@
 <?php
-
-$connect=mysql_connect('localhost','root','comp307project');  
+header('Access-Control-Allow-Origin: *');  
+$connect=mysql_connect('localhost','root','comp307project');
 $DB=mysql_select_db('ProjectDB',$connect);
 
 $parsed_json = json_decode($_POST["jsonAccount"]);
-$username = $parsed_json->{'username'}; 
+$username = $parsed_json->{'username'};
 
 $queryM="SELECT userID FROM Members where username='$username'";
 

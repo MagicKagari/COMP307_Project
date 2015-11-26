@@ -156,6 +156,7 @@ $( document ).ready(function() {
   });
 
   $(".loginBtn").click(function (){
+    checkit();
     var userid = 1; //TODO: get this one from login success result
     //use user id to query information
     $.ajax({

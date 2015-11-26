@@ -1,6 +1,6 @@
 
 function checkit(){
-	
+
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
 
@@ -10,10 +10,10 @@ function checkit(){
 	var user = new Object();
 		user.username = username;
 		jsonString = JSON.stringify(user);
-	
+
 		xhttp = new XMLHttpRequest();
   			xhttp.onreadystatechange = function() {
-  				//TO GET SHAREDKEY 
+  				//TO GET SHAREDKEY
     			if (xhttp.readyState == 4 && xhttp.status == 200) {
       				sharedKey = xhttp.responseText;
 
@@ -23,13 +23,13 @@ function checkit(){
 						account.username = username;
 						account.password = encryptedPassword;
 						jsonString = JSON.stringify(account);
-				
+
 						xhttp = new XMLHttpRequest();
   							xhttp.onreadystatechange = function() {
   								//TO GET THE PASSWORD MATCHING RESULT
     							if (xhttp.readyState == 4 && xhttp.status == 200) {
       								var check=xhttp.responseText;
-      								
+
       								check=parseInt(check);
       								 //ONCE THE CHECK IS TRUE
       								if(check==0){
@@ -37,33 +37,34 @@ function checkit(){
   											xhttp.onreadystatechange = function() {
   												if (xhttp.readyState == 4 && xhttp.status == 200) {
   													sessionID=xhttp.responseText;
-  													//sessionID=parseInt(sessionID);	
+  													//sessionID=parseInt(sessionID);
   													localStorage.setItem("currentSession", sessionID);
   													/*Hello, Stanley*/
   													/*IF THE LOGIN WAS SUCCESFULL*/
     											}
 
   											}
-  											xhttp.open("POST", "~/COMP307_Project/php/sessionID.php", true);
+												xhttp.open("POST", "http://localhost/php/sessionID.php", true);
+  											//xhttp.open("POST", "~/COMP307_Project/php/sessionID.php", true);
   											xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 											xhttp.send("jsonAccount="+jsonString);
   											xhttp.send();
-      								}      							
+      								}
       								else{
       									/*Hello, Stanley*/
       								//IF THE LOGIN WAS NOT SUCCESSFULL
       								}
      							}
   							}
-  						xhttp.open("POST", "~/COMP307_Project/php/test.php", true);
+  						xhttp.open("POST", "http://localhost/php/test.php", true);
   						xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-						xhttp.send("jsonAccount="+jsonString);
+					  	xhttp.send("jsonAccount="+jsonString);
   						xhttp.send();
     			}
   			}
-  		xhttp.open("POST", "~/COMP307_Project/php/getSharedKey.php", true);
+  		xhttp.open("POST", "http://localhost/php/getSharedKey.php", true);
   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("jsonUser="+jsonString);
+	  	xhttp.send("jsonUser="+jsonString);
   		xhttp.send();
 	}
 

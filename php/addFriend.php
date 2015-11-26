@@ -1,13 +1,13 @@
 <?php
+header('Access-Control-Allow-Origin: *');  
 
-
-$connect=mysql_connect('localhost','root','comp307project');  
+$connect=mysql_connect('localhost','root','comp307project');
 $DB=mysql_select_db('ProjectDB',$connect);
 
 
 $parsed_json = json_decode($_POST["Friend"]);
 $username=$parsed_json->{'username'};
-$friend = $parsed_json->{'friendname'}; 
+$friend = $parsed_json->{'friendname'};
 
 
 $query1="SELECT userID FROM Members where username='$username'";
