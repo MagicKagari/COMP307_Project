@@ -20,7 +20,7 @@ $result2=mysql_query($query2);
 $row2=mysql_fetch_array($result2);
 
 $password=$row2['password'];
-$memberID=$row2['userID'];
+$userID=$row2['userID'];
 
 
 $query1="SELECT sharedkey FROM Members where username='$username'";
