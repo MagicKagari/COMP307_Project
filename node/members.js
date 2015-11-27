@@ -66,6 +66,7 @@ exports.getMemberInfo = function(req, resp){
       var query = "SELECT username, giftID FROM Members, Gifts WHERE userID IN ( SELECT fromWho FROM Gifts WHERE toWho='"+userid+"' AND redeemCheck='0')";
       connection.query(query,function(err,rows,fields){
         if(err) throw err;
+        console.log(JSON.stringify(rows));
         resp.send(JSON.stringify({"result":true,"info":{
           'userid':userid,
           'address':address,

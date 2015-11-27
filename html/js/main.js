@@ -204,11 +204,21 @@ function updateUserInformation(username){
     success: function(msg){
       var ret = msg.result;
       if(ret){
+        alert(JSON.stringify(msg.info));
         $("#userinfo-name").text(localStorage.username);
         $("#userinfo-id").text(msg.info.userid);
         $("#userinfo-address").text(msg.info.address);
-        $("#userinfo-credits").text(msg.info.credits);
+        $("#userinfo-credits").text('$'+msg.info.credits);
         $("#userinfo-presents").text(msg.info.numberOfPresents);
+        var giftBox = $("#giftBox");
+        for(var i=0; i<msg.info.giftList.length; i++){
+          var gift = msg.info.giftList[i];
+          var giftEntry = document.createElement('li');
+          giftEntry.className = "list-group-item";
+          giftEntry.text(gift.fromWhoName+" send you a gift "+gift.giftID);
+          giftBox.appendChild(giftEntry);
+        }
+
       }else{
         alert(msg.info);
       }
