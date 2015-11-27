@@ -1,0 +1,165 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+        <div class="lightbox">
+            <div class="productPage">
+                <img class="closeButton" src="img/close.png">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="productPageImage img-circle img-responsive" src="">
+                    </div>
+                    <div class="col-md-8">
+                        <h1 class="productPageTitle">Title Name</h1>
+                        <h3 class="productPageDescription">Description</h3>
+
+                        <button class="sendToFriend">Send to Friend</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="frame">
+            <div class="header">
+                    <h1 class="title">TEA307</h1>
+            </div>
+            <div class="mainpage">
+                <div class="gallery">
+
+                </div>
+
+                <div class="sidebar">
+
+                    <div class="loginBox">
+
+                        <div class="form-group has-feedback username">
+                        <label class="formLabel">Username:</label><br>
+                        <input id="username"class="form-control" type="text" placeholder="Enter your username">
+                        <i class="form-control-feedback glyphicon glyphicon-user"></i>
+                        </div>
+                        <br>
+                        <div class="form-group has-feedback password">
+                        <label class="formLabel has-feedback">Password:</label><br>
+                        <input id="password" class="form-control" type="password" placeholder="Enter your password"><br>
+                        <i class="form-control-feedback glyphicon glyphicon-lock"></i>
+                        </div>
+                        <!--input type="submit" value="submit" onclick="checkit()"-->
+                        <button class="btn btn-success form-control loginBtn">Log In</button>
+                        <a href="signup.html"><button class="btn btn-primary form-control signupBtn">Sign up</button></a>
+                    </div>
+                    <div class="infoBox">
+
+                        <div class="panel panel-primary">
+                          <!-- Default panel contents -->
+                          <div class="panel-heading">Personal Information</div>
+
+                          <!-- Table -->
+                          <table class="table">
+                            <tr>
+                                <td>Name:</td>
+                                <td id="userinfo-name">Dixon Wilson</td>
+                            </tr>
+                            <tr>
+                                <td>ID:</td>
+                                <td id="userinfo-id">1</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td id="userinfo-address">90210 Upper East Side</td>
+                            </tr>
+                            <tr>
+                                <td>Credits:</td>
+                                <td id="userinfo-credits">$156,789</td>
+                            </tr>
+                            <tr>
+                                <td>Presents:</td>
+                                <td id="userinfo-presents">9</td>
+                            </tr>
+                          </table>
+                        </div>
+
+                        <div class="panel panel-primary">
+                          <!-- Default panel contents -->
+                          <div class="panel-heading">Recent Gift Notifications </div>
+                            <ul id="giftBox" class="list-group">
+                              <li class="list-group-item">Sam sent you a gift 3 days ago</li>
+                              <li class="list-group-item">Liam sent you a gift 5 days ago</li>
+                              <li class="list-group-item">Joseph sent you a gift 9 days ago</li>
+                              <li class="list-group-item">Michael sent you a gift 20 days ago</li>
+                              <li class="list-group-item">Sarah sent you a gift 30 days ago</li>
+                            </ul>
+                        </div>
+
+                        <ul class="list-group" style="border:1px solid rgb(47,121,181);border-radius: 3px">
+                          <li class="list-group-item">
+                            <span class="badge">14</span>
+                            Show All Notifications
+                          </li>
+                        </ul>
+
+                        <div class="panel panel-primary addFriend">
+                          <!-- Default panel contents -->
+			FriendName:<input id="friendname" type="text"><br>
+			<input type="submit" value="submit" onclick="checkFriend()">
+			<div class="panel-heading">Add Friend</div>
+                          <ul class="list-group">
+                              <li class="list-group-item">
+                                <div class="form-group has-feedback">
+                                    <input class="form-control" type="text" placeholder="Enter Friend's Name">
+                                    <i class="form-control-feedback glyphicon glyphicon-plus-sign"></i>
+                                </div>
+                              </li>
+
+
+                          </ul>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script src="js/js.cookie.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/addFriend.js"></script>
+	      <script src="js/loginCheck.js"></script>
+        <script src="js/notification.js"></script>
+        <script type="text/javascript">
+        </script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
