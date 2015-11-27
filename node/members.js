@@ -59,14 +59,13 @@ exports.getMemberInfo = function(req, resp){
     if(rows.length == 0){
       resp.send(JSON.stringify({"result":false}));
     }else{
-      var userid = rows[0].userid;
+      var userid = rows[0].userID;
       var address = rows[0].address;
       var credits = rows[0].credits;
       var numberOfPresents = rows[0].numberOfPresents;
       var query = "SELECT username, giftID FROM Members, Gifts WHERE userID IN ( SELECT fromWho FROM Gifts WHERE toWho='"+userid+"' AND redeemCheck='0')";
       connection.query(query,function(err,rows,fields){
         if(err) throw err;
-        console.log(JSON.stringify(rows));
         resp.send(JSON.stringify({"result":true,"info":{
           'userid':userid,
           'address':address,
