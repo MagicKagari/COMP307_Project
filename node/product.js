@@ -24,7 +24,6 @@ exports.getProduct = function(req, resp) {
       resp.send(JSON.stringify(rows[0]));
     });
   }
-  connection.end();
 };
 
 //function that return all products information
@@ -45,7 +44,6 @@ exports.getAllProduct = function(req, resp){
     }
     resp.send(JSON.stringify(rows));
   });
-  connection.end();
 };
 
 //function that return the image a product with filename
@@ -61,5 +59,4 @@ exports.getProductImg = function(req, resp){
   }catch(e){
     console.log('error in getting img for product: '+product_id);
   }
-  connection.end();
 };

@@ -39,7 +39,6 @@ exports.register = function(req, resp){
       resp.send(JSON.stringify({"result":false,"info":"duplicate username"}));
     }
   });
-  connection.end();
 };
 
 //function for getting user information
@@ -77,5 +76,4 @@ exports.getMemberInfo = function(req, resp){
       });
     }
   });
-  connection.end();
 };

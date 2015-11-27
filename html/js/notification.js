@@ -12,21 +12,23 @@ if('undefined' === typeof notification){
 //Poll our backend for notifications, set some reasonable timeout for your application
 
 window.setInterval(function() {
-  $.ajax({
-    url:"http://159.203.18.55:1337/node/gifts/checkGift",
-    //url:"http://localhost:1337/node/gifts/checkGift",
-    type:"POST",
-    data: JSON.stringify({'userid':1}),
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function(msg) {
-      if(msg.result){
-          for(var i=0; i<msg.info.length;i++){
-            Notifier.info("New gift for you", "User: " + msg.info[i].fromWhoName + " GiftID: " + msg.info[i].giftID);
-          }
+  if(Cookies.get('isLoggedIn')){
+    $.ajax({
+      url:"http://159.203.18.55:1337/node/gifts/checkGift",
+      //url:"http://localhost:1337/node/gifts/checkGift",
+      type:"POST",
+      data: JSON.stringify({'userid':Cookies.get('username')}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function(msg) {
+        if(msg.result){
+            for(var i=0; i<msg.info.length;i++){
+              Notifier.info("New gift for you", "User: " + msg.info[i].fromWhoName + " GiftID: " + msg.info[i].giftID);
+            }
+        }
       }
-    }
-  });
+    });
+  }else return;
 }, 5000);    //poll every 5 secs.
 
 /***********************

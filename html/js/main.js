@@ -13,6 +13,8 @@ $.ajax({
    type: 'GET'
 });
 
+Cookies.set('isLoggedIn',false);
+
 function displayProducts(data) {
     var toAdd = document.getElementsByClassName("gallery");
     var i;
@@ -158,6 +160,8 @@ $( document ).ready(function() {
   $(".loginBtn").click(function (){
     //checkLogin();
     var username = $("#username").val();
+    Cookies.set('username',username);
+    Cookies.set('isLoggedIn', true);
     //TODO: get this one from login success result
     updateUserInformation(username);
 
@@ -207,6 +211,11 @@ function updateUserInformation(username){
       var ret = msg.result;
       if(ret){
         alert(JSON.stringify(msg));
+        $("#userinfo-name").html(Cookies.get('username'));
+        $("#userinfo-id").html(msg.userid);
+        $("#userinfo-address").html(msg.address);
+        $("#userinfo-credits").html(msg.credits);
+        $("#userinfo-presents").html(msg.numberOfPresents);
       }else{
         alert(msg.info);
       }
