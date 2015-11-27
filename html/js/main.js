@@ -158,7 +158,7 @@ $( document ).ready(function() {
   });
 
   $(".loginBtn").click(function (){
-    //checkLogin();
+    checkLogin();
     var username = $("#username").val();
     Cookies.set('username',username);
     Cookies.set('isLoggedIn', true);
