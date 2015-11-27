@@ -2,6 +2,7 @@
 
 //function that return meta information about a product with given id
 exports.getProduct = function(req, resp) {
+  /*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -9,7 +10,7 @@ exports.getProduct = function(req, resp) {
     password:'comp307project',
     database:'ProjectDB'
   });
-
+  */
   //validate given product id
   var product_id = req.params.product_id;
   if(isNaN(product_id)){
@@ -28,6 +29,7 @@ exports.getProduct = function(req, resp) {
 
 //function that return all products information
 exports.getAllProduct = function(req, resp){
+  /*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -35,6 +37,7 @@ exports.getAllProduct = function(req, resp){
     password:'comp307project',
     database:'ProjectDB'
   });
+  */
   var query = "SELECT * FROM Product";
   var productList = [];
   connection.query(query, function(err, rows, fields){

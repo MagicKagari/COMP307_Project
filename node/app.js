@@ -10,6 +10,14 @@ var members = require('./members.js');
 var gift = require('./gift.js');
 var html = require('./html.js');
 
+global.mysql = require('mysql');
+global.connection = mysql.createConnection({
+  host:'localhost',
+  user:'root',
+  password:'comp307project',
+  database:'ProjectDB'
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //setup to run in localhost

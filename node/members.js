@@ -5,6 +5,7 @@
 //accept JSON in {username = "foo", password = "foo2", address = "foo3" } format
 //return JSON in {result = true, info = ""} or {result = false, info = "why fail"}
 exports.register = function(req, resp){
+  /*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -12,6 +13,7 @@ exports.register = function(req, resp){
     password:'comp307project',
     database:'ProjectDB'
   });
+  */
   var username = req.body.username;
   var password = req.body.password;
   var address = req.body.address;
@@ -45,6 +47,7 @@ exports.register = function(req, resp){
 //{userid, sessionid}
 //TODO: validate session
 exports.getMemberInfo = function(req, resp){
+  /*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -52,6 +55,7 @@ exports.getMemberInfo = function(req, resp){
     password:'comp307project',
     database:'ProjectDB'
   });
+  */
   var username = req.body.username;
   var query = "SELECT * FROM MembersDetails WHERE userID IN ( SELECT userID FROM Members WHERE username='"+username+"')";
   connection.query(query, function(err, rows, fields){

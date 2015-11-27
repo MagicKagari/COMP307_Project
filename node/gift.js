@@ -8,6 +8,7 @@
 //update toWho of a present
 //return JSON {result, info}
 exports.sendGift = function(req,resp){
+/*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -15,6 +16,7 @@ exports.sendGift = function(req,resp){
     password:'comp307project',
     database:'ProjectDB'
   });
+  */
   var product_id = req.body.product;
   var toWho_id = req.body.toWho;
   var fromWho_id = req.body.fromWho;
@@ -102,6 +104,7 @@ exports.sendGift = function(req,resp){
 //function that redeem gift
 //{userid, giftid}
 exports.redeemGift = function(req, resp){
+  /*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -109,7 +112,7 @@ exports.redeemGift = function(req, resp){
     password:'comp307project',
     database:'ProjectDB'
   });
-
+*/
   var userid = req.body.userid;
   var giftid = req.body.giftid;
 
@@ -159,6 +162,7 @@ exports.redeemGift = function(req, resp){
 //function that cancel a gift and transfer as credits
 //{userid, giftid}
 exports.cancelGift = function(req, resp){
+  /*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -166,7 +170,7 @@ exports.cancelGift = function(req, resp){
     password:'comp307project',
     database:'ProjectDB'
   });
-
+*/
   var userid = req.body.userid;
   var giftid = req.body.giftid;
 
@@ -225,6 +229,7 @@ exports.cancelGift = function(req, resp){
 
 //function that check for a gift using id
 exports.checkGift = function(req, resp){
+  /*
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host:'localhost',
@@ -232,6 +237,7 @@ exports.checkGift = function(req, resp){
     password:'comp307project',
     database:'ProjectDB'
   });
+  */
   var userid = req.body.userid;
   var query = "SELECT * FROM GiftQueue WHERE userID='"+userid+"'";
   connection.query(query, function(err, rows, fields){
