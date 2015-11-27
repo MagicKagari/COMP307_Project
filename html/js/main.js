@@ -13,7 +13,7 @@ $.ajax({
    type: 'GET'
 });
 
-Cookies.set('isLoggedIn',false);
+localStorage.isLoggedIn = false;
 
 function displayProducts(data) {
     var toAdd = document.getElementsByClassName("gallery");
@@ -159,12 +159,6 @@ $( document ).ready(function() {
 
   $(".loginBtn").click(function (){
     checkLogin();
-    var username = $("#username").val();
-    Cookies.set('username',username);
-    Cookies.set('isLoggedIn', true);
-    //TODO: get this one from login success result
-    updateUserInformation(username);
-
   });
 
   //*******************************************************************************
@@ -210,12 +204,11 @@ function updateUserInformation(username){
     success: function(msg){
       var ret = msg.result;
       if(ret){
-        alert(JSON.stringify(msg));
-        $("#userinfo-name").html(Cookies.get('username'));
-        $("#userinfo-id").html(msg.userid);
-        $("#userinfo-address").html(msg.address);
-        $("#userinfo-credits").html(msg.credits);
-        $("#userinfo-presents").html(msg.numberOfPresents);
+        $("#userinfo-name").text(localStorage.username);
+        $("#userinfo-id").text(msg.info.userid);
+        $("#userinfo-address").text(msg.info.address);
+        $("#userinfo-credits").text(msg.info.credits);
+        $("#userinfo-presents").text(msg.info.numberOfPresents);
       }else{
         alert(msg.info);
       }

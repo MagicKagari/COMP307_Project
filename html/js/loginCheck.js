@@ -40,8 +40,6 @@ function checkLogin(){
   													//sessionID=parseInt(sessionID);
   													localStorage.setItem("currentSession", sessionID);
   													var $scrolled = localStorage.getItem("scrolled");
-
-
 												    $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
 												    $(".password").animate({opacity:0},200,function(){$(".password").css("display","none");});
 												    $(".loginBox").animate({opacity:0},200,function(){$(this).css("display","none");});
@@ -50,13 +48,19 @@ function checkLogin(){
 												      $(".loginBox").css("display","none");
 												      $(".infoBox").css("display","block");
 												      $(".infoBox").height(0);
-
 												      if($scrolled === false){
 												        $(".infoBox").animate({height:$(window).height()-210},400);
-												      }
+																}
 												      else{
 												        $(".infoBox").animate({height:$(window).height()-100},400);
 												      }
+
+															var username = $("#username").val();
+															localStorage.username = username;
+															localStorage.isLoggedIn = true;
+															updateUserInformation(username);
+
+
 												      });
     											}
 
