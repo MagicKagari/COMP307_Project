@@ -53,13 +53,14 @@ exports.getMemberInfo = function(req, resp){
     password:'comp307project',
     database:'ProjectDB'
   });
-  var userid = req.body.userid;
-  var query = "SELECT * FROM MembersDetails WHERE userID='"+userid+"'";
+  var username = req.body.username;
+  var query = "SELECT * FROM MembersDetails WHERE userID IN ( SELECT userID FROM Members WHERE username='"+username+"')";
   connection.query(query, function(err, rows, fields){
     if(err) throw err;
     if(rows.length == 0){
       resp.send(JSON.stringify({"result":false}));
     }else{
+      var userid = rows[0].userid;
       var address = rows[0].address;
       var credits = rows[0].credits;
       var numberOfPresents = rows[0].numberOfPresents;
@@ -67,6 +68,7 @@ exports.getMemberInfo = function(req, resp){
       connection.query(query,function(err,rows,fields){
         if(err) throw err;
         resp.send(JSON.stringify({"result":true,"info":{
+          'userid':userid,
           'address':address,
           'credits':credits,
           'numberOfPresents':numberOfPresents,
