@@ -3,6 +3,7 @@ function checkLogin(){
 
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
+	localStorage.setItem("currentUser", username);
 
 	var sharedKey= 0;
 	var sessionID= 0;

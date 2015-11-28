@@ -26,6 +26,7 @@ if($compare==0){
  $result3=mysql_query($query3);
  echo "0";
 }
- else echo "1";
+ else {echo "1";
+ }
 
  ?>

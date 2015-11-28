@@ -1,6 +1,6 @@
 function checkFriend(){
 	
-	var username = document.getElementById("username").value;
+	var username = localStorage.getItem("currentUser");
 	var friendname = document.getElementById("friendname").value;
 	
 	var Friend = new Object();
@@ -10,14 +10,14 @@ function checkFriend(){
 	
 		xhttp = new XMLHttpRequest();
   			xhttp.onreadystatechange = function() {
-  				//TO GET SHAREDKEY 
+  				
     			if (xhttp.readyState == 4 && xhttp.status == 200) {
       				 var check= xhttp.responseText;
       				 if(check==0){
-      				 	//SUCCESFULLY ADDED "THE FRIEND NAME" 
+      				 	 window.alert("friend added");
       				 }
       				 else{
-      				 	//"THE FRIEND NAME" NOT FOUND
+      				 	window.alert("couldn't find the friend");
       				 }
 
 					}
