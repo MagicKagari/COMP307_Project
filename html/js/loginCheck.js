@@ -59,8 +59,6 @@ function checkLogin(){
 															localStorage.username = username;
 															localStorage.isLoggedIn = true;
 															updateUserInformation(username);
-
-
 												      });
     											}
 

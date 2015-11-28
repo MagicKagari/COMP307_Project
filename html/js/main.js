@@ -191,6 +191,31 @@ $( document ).ready(function() {
       setTimeout(function(){animating=false; },200);
     }
   });
+
+  //check if user already logged on by checking cookies
+  var userinfo = JSON.parse($.cookie('userinfo'));
+  alert(userinfo);
+  if(userinfo != null){
+    var $scrolled = localStorage.getItem("scrolled");
+    $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
+    $(".password").animate({opacity:0},200,function(){$(".password").css("display","none");});
+    $(".loginBox").animate({opacity:0},200,function(){$(this).css("display","none");});
+    $(".signupBtn").animate({opacity:0},200,function(){$(".signupBtn").css("display","none");});
+    $(".loginBox").animate({height:"0px"},200,function(){
+      $(".loginBox").css("display","none");
+      $(".infoBox").css("display","block");
+      $(".infoBox").height(0);
+      if($scrolled === false){
+        $(".infoBox").animate({height:$(window).height()-210},400);
+      }
+      else{
+        $(".infoBox").animate({height:$(window).height()-100},400);
+      }
+    });
+    updateUserInformation(userinfo.username);
+    localStorage.isLoggedIn = true;
+    localStorage.username = userinfo.username;
+  }
 });
 
 function updateUserInformation(username){
@@ -204,12 +229,14 @@ function updateUserInformation(username){
     success: function(msg){
       var ret = msg.result;
       if(ret){
+        $.cookie('userinfo',msg.info);
         $("#userinfo-name").text(localStorage.username);
         $("#userinfo-id").text(msg.info.userid);
         $("#userinfo-address").text(msg.info.address);
         $("#userinfo-credits").text('$'+msg.info.credits);
         $("#userinfo-presents").text(msg.info.numberOfPresents);
         var giftBox = $("#giftBox");
+        giftBox.empty();
         for(var i=0; i<msg.info.giftList.length; i++){
           var gift = msg.info.giftList[i];
           var giftEntry = document.createElement('li');
@@ -217,7 +244,7 @@ function updateUserInformation(username){
           giftEntry.innerHTML = gift.username+" send you a gift "+gift.giftID;
           giftBox.append(giftEntry);
         }
-
+        alert(JSON.stringify($.cookie()));
       }else{
         alert(msg.info);
       }
