@@ -270,6 +270,7 @@ function updateUserInformation(username){
       var ret = msg.result;
       if(ret){
         localStorage.username = username;
+        localStorage.userID = msg.info.userid;
         localStorage.userinfo = JSON.stringify(msg.info);
         $("#userinfo-name").text(localStorage.username);
         $("#userinfo-id").text(msg.info.userid);
@@ -277,7 +278,6 @@ function updateUserInformation(username){
         $("#userinfo-credits").text('$'+msg.info.credits);
         $("#userinfo-presents").text(msg.info.numberOfPresents);
         localStorage.friendList = JSON.stringify(msg.info.friendList);
-        console.log(localStorage.friendList);
         var giftBox = $("#giftBox");
         giftBox.empty();
         for(var i=0; i<msg.info.giftList.length; i++){
@@ -300,14 +300,43 @@ function updateUserInformation(username){
 function logout(){
   localStorage.removeItem('userinfo');
   localStorage.removeItem('username');
+  localStorage.removeItem('userID');
   localStorage.removeItem('currentSession');
   localStorage.removeItem('isLoggedIn');
   localStorage.removeItem('firendList');
   location.reload();
 }
 
-function sendGift(){
-
-
+function sendGift(productID, toWhoName){
+  var friendList = JSON.parse(localStorage.friendList);
+  var toWhoID;
+  for(var i =0; i<friendList.length;i++){
+    if(friendList[i].username === toWhoName) toWhoID = friendList[i].userID;
+  }
+  if(toWhoID == null){
+    alert("Invalid toWhoName");
+    return;
+  }
+  var fromWhoID = localStorage.userID;
+  console.log(productID + " to:" + toWhoID + " from:" + fromWhoID);
+  var send = {'product':productID,'toWho':toWhoID,'fromWho':fromWhoID};
+  $.ajax({
+    url:"http://159.203.18.55:1337/node/members/register",
+    //url:'http://localhost:1337/node/members/register',
+    type:"POST",
+    data: JSON.stringify(register),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg){
+      if(msg.result){
+        alert('gift send successful');
+      }else{
+        alert(msg.info);
+      }
+    },
+    error: function(error){
+      alert(JSON.stringify(error));
+    }
+  });
 
 }
