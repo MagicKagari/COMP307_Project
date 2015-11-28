@@ -193,8 +193,10 @@ $( document ).ready(function() {
   });
 
   //check if user already logged on by checking cookies
-  var userinfo = JSON.parse($.cookie('userinfo'));
-  if(userinfo != null){
+  var userinfo = localStorage.userinfo;
+  var username =localStorage.username;
+  if(userinfo != null && username != null){
+    userinfo = JSON.parse(userinfo);
     var $scrolled = localStorage.getItem("scrolled");
     $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
     $(".password").animate({opacity:0},200,function(){$(".password").css("display","none");});
@@ -211,9 +213,8 @@ $( document ).ready(function() {
         $(".infoBox").animate({height:$(window).height()-100},400);
       }
     });
-    updateUserInformation(userinfo.username);
+    updateUserInformation(localStorage.username);
     localStorage.isLoggedIn = true;
-    localStorage.username = userinfo.username;
   }
 });
 
@@ -228,7 +229,8 @@ function updateUserInformation(username){
     success: function(msg){
       var ret = msg.result;
       if(ret){
-        $.cookie('userinfo',JSON.stringify(msg.info));
+        localStorage.username = username;
+        localStorage.userinfo = JSON.stringify(msg.info);
         $("#userinfo-name").text(localStorage.username);
         $("#userinfo-id").text(msg.info.userid);
         $("#userinfo-address").text(msg.info.address);
@@ -244,7 +246,7 @@ function updateUserInformation(username){
           giftBox.append(giftEntry);
         }
       }else{
-        alert(msg.info);
+        alert(username + JSON.stringify(msg));
       }
     },
     error: function(error){
