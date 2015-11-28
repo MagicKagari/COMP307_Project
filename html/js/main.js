@@ -218,6 +218,46 @@ $( document ).ready(function() {
   }
 });
 
+$(".loginBtn").prop("disabled", true);
+$isUsernameFilled = false;
+$isPasswordFilled = false;
+$("#username").on('input',function(){
+  if(this.value == "")
+  {
+    $isUsernameFilled = false;
+  }
+  else
+  {
+    $isUsernameFilled = true;
+  }
+  if($isUsernameFilled && isPasswordFilled)
+  {
+    $(".loginBtn").prop("disabled", false);
+  }
+  else
+  {
+    $(".loginBtn").prop("disabled", true);
+  }
+});
+$("#password").on('input',function(){
+  if(this.value == "")
+  {
+    $isPasswordFilled = false;
+  }
+  else
+  {
+    $isPasswordFilled = true;
+  }
+  if($isUsernameFilled && $isPasswordFilled)
+  {
+    $(".loginBtn").prop("disabled", false);
+  }
+  else
+  {
+    $(".loginBtn").prop("disabled", true);
+  }
+});
+
 function updateUserInformation(username){
   $.ajax({
     url:"http://159.203.18.55:1337/node/members/getMemberInfo",
