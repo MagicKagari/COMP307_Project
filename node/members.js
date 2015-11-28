@@ -70,13 +70,19 @@ exports.getMemberInfo = function(req, resp){
       var query = "SELECT username, giftID FROM Members, Gifts WHERE userID IN ( SELECT fromWho FROM Gifts WHERE toWho='"+userid+"' AND redeemCheck='0')";
       connection.query(query,function(err,rows,fields){
         if(err) throw err;
-        resp.send(JSON.stringify({"result":true,"info":{
-          'userid':userid,
-          'address':address,
-          'credits':credits,
-          'numberOfPresents':numberOfPresents,
-          'giftList':rows
-        }}));
+        var giftList = rows;
+        query = "SELECT username, userID FROM Members WHERE Members.username IN ( SELECT friends FROM Friends WHERE userID='"+userid+"')";
+        connection.query(query, function(err, rows, fields){
+          if(err) throw err;
+          resp.send(JSON.stringify({"result":true,"info":{
+            'userid':userid,
+            'address':address,
+            'credits':credits,
+            'numberOfPresents':numberOfPresents,
+            'giftList':giftList,
+            'friendList':rows
+          }}));
+        });
       });
     }
   });

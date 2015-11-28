@@ -236,6 +236,8 @@ function updateUserInformation(username){
         $("#userinfo-address").text(msg.info.address);
         $("#userinfo-credits").text('$'+msg.info.credits);
         $("#userinfo-presents").text(msg.info.numberOfPresents);
+        localStorage.friendList = JSON.stringify(msg.info.friendList);
+        console.log(localStorage.friendList);
         var giftBox = $("#giftBox");
         giftBox.empty();
         for(var i=0; i<msg.info.giftList.length; i++){
@@ -260,5 +262,12 @@ function logout(){
   localStorage.removeItem('username');
   localStorage.removeItem('currentSession');
   localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('firendList');
   location.reload();
+}
+
+function sendGift(){
+
+
+
 }
