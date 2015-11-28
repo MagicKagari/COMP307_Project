@@ -2,7 +2,7 @@ function checkFriend(){
 	
 	var username = localStorage.getItem("currentUser");
 	var friendname = document.getElementById("friendname").value;
-	
+
 	var Friend = new Object();
 		Friend.friendname = friendname;
 		Friend.username=username;
@@ -12,15 +12,21 @@ function checkFriend(){
   			xhttp.onreadystatechange = function() {
   				
     			if (xhttp.readyState == 4 && xhttp.status == 200) {
-      				 var check= xhttp.responseText;
+var echo= xhttp.responseText;
+window.alert(echo);
+}
+/*      				 
+				var check= xhttp.responseText;
+
       				 if(check==0){
-      				 	 window.alert("friend added");
+      				 	 window.alert("FRIEND ADDED");
       				 }
       				 else{
-      				 	window.alert("couldn't find the friend");
+      				 	window.alert("TRY DIFFERENT FRIEND");
       				 }
 
 					}
+*/
   			}
   		xhttp.open("POST", "http://159.203.18.55/php/addFriend.php", true);
   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
