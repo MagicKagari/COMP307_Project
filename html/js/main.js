@@ -254,3 +254,11 @@ function updateUserInformation(username){
     }
   });
 }
+
+function logout(){
+  localStorage.removeItem('userinfo');
+  localStorage.removeItem('username');
+  localStorage.removeItem('currentSession');
+  localStorage.removeItem('isLoggedIn');
+  location.reload();
+}
