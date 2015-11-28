@@ -1,11 +1,10 @@
 <?php
-header('Access-Control-Allow-Origin: *');  
 
+header('Access-Control-Allow-Origin: *');  
 $connect=mysql_connect('localhost','root','comp307project');
 $DB=mysql_select_db('ProjectDB',$connect);
 
-
-$parsed_json = json_decode($_POST["Friend"]);
+$parsed_json = json_decode($_POST["jsonUser"]);
 $username=$parsed_json->{'username'};
 $friend = $parsed_json->{'friendname'};
 
@@ -17,16 +16,18 @@ $userID=$row1['userID'];
 
 $query2="SELECT username FROM Members where username='$friend'";
 $result2=mysql_query($query2, $connect);
-$row2=mysql_fetch_array($result2);
+//$row2=mysql_fetch_array($result2);
+$numberOfRecord=mysql_num_rows($result2);
+//echo $numberOfRecord;
 
-
-$compare=strcmp($friend, $row2['username']);
-if($compare==0){
+//$compare=strcmp($friend, $row2['username']);
+if($numberOfRecord>0){
  $query3="INSERT INTO Friends (userID, friends) VALUES ($userID, $friend)";
  $result3=mysql_query($query3);
  echo "0";
 }
- else {echo "1";
+ else {
+	echo "1";
  }
 
  ?>
