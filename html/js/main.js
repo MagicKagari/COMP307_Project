@@ -194,7 +194,6 @@ $( document ).ready(function() {
 
   //check if user already logged on by checking cookies
   var userinfo = JSON.parse($.cookie('userinfo'));
-  alert(userinfo);
   if(userinfo != null){
     var $scrolled = localStorage.getItem("scrolled");
     $(".username").animate({opacity:0},200,function(){$(".username").css("display","none");});
@@ -229,7 +228,7 @@ function updateUserInformation(username){
     success: function(msg){
       var ret = msg.result;
       if(ret){
-        $.cookie('userinfo',msg.info);
+        $.cookie('userinfo',JSON.stringify(msg.info));
         $("#userinfo-name").text(localStorage.username);
         $("#userinfo-id").text(msg.info.userid);
         $("#userinfo-address").text(msg.info.address);
@@ -244,7 +243,6 @@ function updateUserInformation(username){
           giftEntry.innerHTML = gift.username+" send you a gift "+gift.giftID;
           giftBox.append(giftEntry);
         }
-        alert(JSON.stringify($.cookie()));
       }else{
         alert(msg.info);
       }

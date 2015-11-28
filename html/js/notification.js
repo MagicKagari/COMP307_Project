@@ -17,7 +17,7 @@ window.setInterval(function() {
       url:"http://159.203.18.55:1337/node/gifts/checkGift",
       //url:"http://localhost:1337/node/gifts/checkGift",
       type:"POST",
-      data: JSON.stringify({'userid':$.cookie('username')}),
+      data: JSON.stringify({'userid':JSON.parse($.cookie('username')).username}),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(msg) {
