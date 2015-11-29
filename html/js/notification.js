@@ -29,7 +29,6 @@ window.setInterval(function() {
         }
       },
       error: function(error){
-        console.log(JSON.stringify(error));
       }
     });
   }else return;
