@@ -329,44 +329,37 @@ $(".sendToFriend").click(function(){
   var productID = $(".productPageID").text();
   sendGift(productID, selectedFriend);
 });
+
 function logout(){
-	
+
 	var sessionID=localStorage.getItem("currentSession");
 
 	var Session = new Object();
 		Session.sessionID = sessionID;
 		jsonString = JSON.stringify(Session);
-	
 		xhttp = new XMLHttpRequest();
-  			xhttp.onreadystatechange = function() {
-  				
-    			if (xhttp.readyState == 4 && xhttp.status == 200) {
-  				 
-				var check= xhttp.responseText;
-
-      				 if(check==0){
-						window.alert("Successful logout!");
-      				 	   localStorage.removeItem('userinfo');
-  					   localStorage.removeItem('username');
+  	xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+      	var check= xhttp.responseText;
+				 if(check==0){
+  					window.alert("Successful logout!");
+				 	   localStorage.removeItem('userinfo');
+					   localStorage.removeItem('username');
  					   localStorage.removeItem('currentSession');
-  				           localStorage.removeItem('isLoggedIn');
-  					   localStorage.removeItem('firendList');
-  					   
-						location.reload();
-					   
-      				 }
-      				 else{
-      				 	window.alert("Logout failed");
-      				 }
-
-				}
-
-  			}
-  		xhttp.open("POST", "http://159.203.18.55/php/logout.php", true);
-  		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+             localStorage.removeItem('isLoggedIn');
+  				   localStorage.removeItem('friendList');
+      			 location.reload();
+      	}
+      	else{
+      			window.alert("Logout failed");
+      	}
+		  }
+  	}
+  	xhttp.open("POST", "http://159.203.18.55/php/logout.php", true);
+  	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("jsonUser="+jsonString);
-  		xhttp.send();
-	}
+  	xhttp.send();
+}
 
 
 function sendGift(productID, toWhoName){
