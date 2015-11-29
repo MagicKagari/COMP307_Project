@@ -156,7 +156,13 @@ overflow-x: hidden;
     display: none;
     height: 0px;
 }
-
+#friendname{
+    width: 190px;
+    display: inline-block;
+}
+#addFriendBtn{
+    display: inline-block;
+}
 .addFriend .list-group-item{
     padding: 3px;
 }
