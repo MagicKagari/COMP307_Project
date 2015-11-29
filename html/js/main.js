@@ -448,7 +448,7 @@ function redeemGift(giftID){
     dataType: "json",
     success: function(msg){
       if(msg.result){
-        alert(msg.info));
+        alert(msg.info);
         updateUserInformation(localStorage.username);
       }else{
         alert(msg.info);
@@ -471,7 +471,7 @@ function cancelGift(giftID){
     dataType: "json",
     success: function(msg){
       if(msg.result){
-        alert(msg.info));
+        alert(msg.info);
         updateUserInformation(localStorage.username);
       }else{
         alert(msg.info);
