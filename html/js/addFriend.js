@@ -15,7 +15,8 @@ function checkFriend(){
 				var check= xhttp.responseText;
 
       				 if(check==0){
-      				 	 window.alert("FRIEND ADDED");
+      				 	updateUserInformation(localStorage.username);
+      				 	window.alert("FRIEND ADDED");
       				 }
       				 else{
       				 	window.alert("TRY DIFFERENT FRIEND");

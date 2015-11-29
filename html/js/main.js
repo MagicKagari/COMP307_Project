@@ -266,7 +266,26 @@ $("#password").on('input',function(){
     $(".loginBtn").prop("disabled", true);
   }
 });
-
+$isFriendnameFilled = false;
+$("#addFriendbtn").prop("disabled", true);
+$("#friendname").on('input',function(){
+  if(this.value == "")
+  {
+    $isFriendnameFilled = false;
+  }
+  else
+  {
+    $isFriendnameFilled = true;
+  }
+  if($isFriendnameFilled )
+  {
+    $("#addFriendbtn").prop("disabled", false);
+  }
+  else
+  {
+    $("#addFriendbtn").prop("disabled", true);
+  }
+});
 function updateUserInformation(username){
   $.ajax({
     url:"http://159.203.18.55:1337/node/members/getMemberInfo",
@@ -282,7 +301,7 @@ function updateUserInformation(username){
         localStorage.userID = msg.info.userid;
         localStorage.userinfo = JSON.stringify(msg.info);
         $("#userinfo-name").text(localStorage.username);
-        $("#userinfo-id").text(msg.info.userid);
+        //$("#userinfo-id").text(msg.info.userid);
         $("#userinfo-address").text(msg.info.address);
         $("#userinfo-credits").text('$'+msg.info.credits.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
         $("#userinfo-presents").text(msg.info.numberOfPresents);
@@ -293,7 +312,8 @@ function updateUserInformation(username){
           var gift = msg.info.giftList[i];
           var giftEntry = document.createElement('li');
           giftEntry.className = "list-group-item";
-          giftEntry.innerHTML = gift.username+" send you a gift "+gift.giftID;
+          giftEntry.innerHTML = gift.username+" has sent you a gift";
+          //+gift.giftID;
           var giftIDEntry = document.createElement('p');
           giftIDEntry.className = "list-group-item-id"
           giftIDEntry.innerHTML = gift.giftID;
@@ -310,6 +330,7 @@ function updateUserInformation(username){
       }
       $(".sendToFriend").text("Send To Friend");
       var friendList = JSON.parse(localStorage.friendList);
+      $("#sel1").empty();
       for(var i = 0; i< friendList.length; i++)
       {
         $("#sel1").append($('<option>', {
