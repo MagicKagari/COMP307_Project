@@ -284,7 +284,7 @@ function updateUserInformation(username){
         $("#userinfo-name").text(localStorage.username);
         $("#userinfo-id").text(msg.info.userid);
         $("#userinfo-address").text(msg.info.address);
-        $("#userinfo-credits").text('$'+msg.info.credits);
+        $("#userinfo-credits").text('$'+msg.info.credits.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
         $("#userinfo-presents").text(msg.info.numberOfPresents);
         localStorage.friendList = JSON.stringify(msg.info.friendList);
         var giftBox = $("#giftBox");
@@ -294,11 +294,16 @@ function updateUserInformation(username){
           var giftEntry = document.createElement('li');
           giftEntry.className = "list-group-item";
           giftEntry.innerHTML = gift.username+" send you a gift "+gift.giftID;
+          var giftIDEntry = document.createElement('p');
+          giftIDEntry.className = "list-group-item-id"
+          giftIDEntry.innerHTML = gift.giftID;
+          giftIDEntry.style.display = "none";
           giftEntry.onclick = function(){
-              var giftID = gift.giftID;
-
+            var giftID = $(this).children('.list-group-item-id').text();
+            openGiftPanel(giftID);
           }
           giftBox.append(giftEntry);
+          giftEntry.appendChild(giftIDEntry);
         }
       }else{
         alert(username + JSON.stringify(msg));
@@ -364,6 +369,7 @@ function sendGift(productID, toWhoName){
       alert(JSON.stringify(error));
     }
   });
+  updateUserInformation(localStorage.username);
 }
 
 function openGiftPanel(giftID){

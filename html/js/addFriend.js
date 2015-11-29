@@ -1,5 +1,5 @@
 function checkFriend(){
-	
+
 	var username = localStorage.getItem("currentUser");
 	var friendname = document.getElementById("friendname").value;
 
@@ -7,15 +7,15 @@ function checkFriend(){
 		Friend.friendname = friendname;
 		Friend.username=username;
 		jsonString = JSON.stringify(Friend);
-	
+
 		xhttp = new XMLHttpRequest();
   			xhttp.onreadystatechange = function() {
-  				
+
     			if (xhttp.readyState == 4 && xhttp.status == 200) {
 var echo= xhttp.responseText;
 window.alert(echo);
 }
-/*      				 
+/*
 				var check= xhttp.responseText;
 
       				 if(check==0){
@@ -32,5 +32,6 @@ window.alert(echo);
   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("jsonUser="+jsonString);
   		xhttp.send();
-	}
 
+			updateUserInformation(username);
+	}
