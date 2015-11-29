@@ -67,7 +67,7 @@ exports.getMemberInfo = function(req, resp){
       var address = rows[0].address;
       var credits = rows[0].credits;
       var numberOfPresents = rows[0].numberOfPresents;
-      var query = "SELECT username, giftID FROM Members, Gifts WHERE userID IN ( SELECT fromWho FROM Gifts WHERE toWho='"+userid+"' AND redeemCheck='0')";
+      var query = "SELECT username, giftID FROM Members, Gifts WHERE userID IN ( SELECT fromWho FROM Gifts WHERE toWho='"+userid+"' AND redeemCheck='0') AND giftID IN (SELECT giftID FROM Gifts WHERE toWho='"+userid"' AND redeemCheck='0')";
       connection.query(query,function(err,rows,fields){
         if(err) throw err;
         var giftList = rows;
