@@ -419,8 +419,45 @@ function openGiftPanel(giftID){
 function redeemGift(giftID){
   var userID = localStorage.userID;
   console.log("redeemGift "+userID+ " "+giftID);
+  $.ajax({
+    url:"http://159.203.18.55:1337/node/gifts/redeemGift",
+    type:"POST",
+    data: JSON.stringify({'userid':userID,'giftid':giftID}),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg){
+      if(msg.result){
+        alert(msg.info));
+        updateUserInformation(localStorage.username);
+      }else{
+        alert(msg.info);
+      }
+    },
+    error: function(error){
+      alert(JSON.stringify(error));
+    }
+  });
 }
+
 function cancelGift(giftID){
   var userID = localStorage.userID;
   console.log("CancelGift "+userID+ " "+giftID);
+  $.ajax({
+    url:"http://159.203.18.55:1337/node/gifts/cancelGift",
+    type:"POST",
+    data: JSON.stringify({'userid':userID,'giftid':giftID}),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg){
+      if(msg.result){
+        alert(msg.info));
+        updateUserInformation(localStorage.username);
+      }else{
+        alert(msg.info);
+      }
+    },
+    error: function(error){
+      alert(JSON.stringify(error));
+    }
+  });
 }

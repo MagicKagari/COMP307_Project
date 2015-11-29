@@ -16,6 +16,7 @@ function checkFriend(){
 
       				 if(check==0){
       				 	 window.alert("FRIEND ADDED");
+								 updateUserInformation(username);
       				 }
       				 else{
       				 	window.alert("TRY DIFFERENT FRIEND");
@@ -28,6 +29,4 @@ function checkFriend(){
   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("jsonUser="+jsonString);
   		xhttp.send();
-
-			updateUserInformation(username);
 	}
