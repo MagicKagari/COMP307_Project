@@ -21,6 +21,7 @@ window.setInterval(function() {
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(msg) {
+        updateUserInformation(localStorage.username);
         if(msg.result){
             for(var i=0; i<msg.info.length;i++){
               Notifier.info("New gift for you", "User: " + msg.info[i].fromWhoName + " GiftID: " + msg.info[i].giftID);
@@ -32,7 +33,7 @@ window.setInterval(function() {
       }
     });
   }else return;
-}, 5000);    //poll every 5 secs.
+}, 1000);    //poll every 1 secs.
 
 /***********************
 * Notifier.js - Developed by rlemon (rob.lemon@gmail.com) https://github.com/rlemon/Notifier.js
