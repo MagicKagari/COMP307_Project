@@ -17,7 +17,7 @@ window.setInterval(function() {
       url:"http://159.203.18.55:1337/node/gifts/checkGift",
       //url:"http://localhost:1337/node/gifts/checkGift",
       type:"POST",
-      data: JSON.stringify({'userid':localStorage.username}),
+      data: JSON.stringify({'userid':localStorage.userID}),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(msg) {
@@ -26,6 +26,9 @@ window.setInterval(function() {
               Notifier.info("New gift for you", "User: " + msg.info[i].fromWhoName + " GiftID: " + msg.info[i].giftID);
             }
         }
+      },
+      error: function(error){
+        console.log(JSON.stringify(error));
       }
     });
   }else return;

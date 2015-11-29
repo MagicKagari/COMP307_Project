@@ -289,7 +289,7 @@ function updateUserInformation(username){
         localStorage.friendList = JSON.stringify(msg.info.friendList);
         var giftBox = $("#giftBox");
         giftBox.empty();
-        for(var i=0; i<msg.info.giftList.length; i++){
+        for(var i=0; i<msg.info.giftList.length && i<3; i++){
           var gift = msg.info.giftList[i];
           var giftEntry = document.createElement('li');
           giftEntry.className = "list-group-item";
@@ -322,9 +322,7 @@ function updateUserInformation(username){
 $(".sendToFriend").click(function(){
   var selectedFriend = $("#sel1").find(":selected").text();
   var productID = $(".productPageID").text();
-  alert(selectedFriend + " " + productID);
-
-
+  sendGift(productID, selectedFriend);
 });
 function logout(){
   localStorage.removeItem('userinfo');
@@ -369,7 +367,7 @@ function sendGift(productID, toWhoName){
 }
 
 function openGiftPanel(giftID){
-  $.ajax(){
+  $.ajax({
     url:"http://159.203.18.55:1337/node/gifts/getGift",
     type:"POST",
     data: JSON.stringify({'giftid':giftID}),
@@ -386,9 +384,7 @@ function openGiftPanel(giftID){
     error: function(error){
       alert(JSON.stringify(error));
     }
-  };
-
-
+  });
 }
 
 function redeemGift(giftID){
