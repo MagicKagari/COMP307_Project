@@ -156,13 +156,12 @@ $( document ).ready(function() {
   //Close popup if user clicks outside popup
   //****************************************
   $(".lightbox").click(function(){
-
     $(this).animate({opacity:0},200,function(){$(this).css("display","none");});
   });
   //******************************************
   //Close popup if user clicks on close button
   //******************************************
-  $(".closeButton").click(function(){
+  $(".lightbox .closeButton").click(function(){
     $(".lightbox").animate({opacity:0},200,function(){$(".lightbox").css("display","none");});
   });
 
@@ -307,7 +306,7 @@ function updateUserInformation(username){
         $("#userinfo-presents").text(msg.info.numberOfPresents);
         localStorage.friendList = JSON.stringify(msg.info.friendList);
         var giftBox = $("#giftBox");
-        giftBox.empty();
+        $("#giftBox li").remove();
         for(var i=0; i<msg.info.giftList.length && i<3; i++){
           var gift = msg.info.giftList[i];
           var giftEntry = document.createElement('li');
@@ -417,6 +416,7 @@ function sendGift(productID, toWhoName){
 }
 
 function openGiftPanel(giftID){
+  localStorage.giftID = giftID;
   $.ajax({
     url:"http://159.203.18.55:1337/node/gifts/getGift",
     type:"POST",
@@ -426,7 +426,22 @@ function openGiftPanel(giftID){
     success: function(msg){
       if(msg.result){
         var productInfo = msg.info;
-        alert(JSON.stringify(productInfo));
+        $('.giftBox').animate({opacity:1},200,function(){$(".giftBox").css("display","inline");});
+        $('.giftBox .closeButton').click(function(){
+          $('.giftBox').animate({opacity:0},200,function(){$(".giftBox").css("display","none");});
+        });
+        $('.giftBox .productPageImage').attr("src","http://159.203.18.55/html/img/"+productInfo.img);
+        $('.giftBox .productPageTitle').text(productInfo.productName);
+        $('.giftBox .productPageDescription').text(productInfo.description);
+        $('.giftBox .productPrice').text("$"+productInfo.price);
+        $('.redeemGift').off('click');
+        $('.redeemGift').on('click', function(){
+          redeemGift(localStorage.giftID);
+        });
+        $('.cancelGift').off('click');
+        $('.cancelGift').on('click', function(){
+          cancelGift(localStorage.giftID);
+        });
       }else{
         alert(msg.info);
       }
