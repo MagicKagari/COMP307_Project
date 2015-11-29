@@ -235,7 +235,7 @@ $("#username").on('input',function(){
   {
     $isUsernameFilled = true;
   }
-  if($isUsernameFilled && isPasswordFilled)
+  if($isUsernameFilled && $isPasswordFilled)
   {
     $(".loginBtn").prop("disabled", false);
   }
