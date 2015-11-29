@@ -285,6 +285,10 @@ function updateUserInformation(username){
           var giftEntry = document.createElement('li');
           giftEntry.className = "list-group-item";
           giftEntry.innerHTML = gift.username+" send you a gift "+gift.giftID;
+          giftEntry.onclick = function(){
+              var giftID = gift.giftID;
+
+          }
           giftBox.append(giftEntry);
         }
       }else{
@@ -321,10 +325,9 @@ function sendGift(productID, toWhoName){
   console.log(productID + " to:" + toWhoID + " from:" + fromWhoID);
   var send = {'product':productID,'toWho':toWhoID,'fromWho':fromWhoID};
   $.ajax({
-    url:"http://159.203.18.55:1337/node/members/register",
-    //url:'http://localhost:1337/node/members/register',
+    url:"http://159.203.18.55:1337/node/gifts/sendGift",
     type:"POST",
-    data: JSON.stringify(register),
+    data: JSON.stringify(send),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(msg){
@@ -338,5 +341,36 @@ function sendGift(productID, toWhoName){
       alert(JSON.stringify(error));
     }
   });
+}
 
+function openGiftPanel(giftID){
+  $.ajax(){
+    url:"http://159.203.18.55:1337/node/gifts/getGift",
+    type:"POST",
+    data: JSON.stringify({'giftid':giftID}),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg){
+      if(msg.result){
+        var productInfo = msg.info;
+        alert(JSON.stringify(productInfo));
+      }else{
+        alert(msg.info);
+      }
+    },
+    error: function(error){
+      alert(JSON.stringify(error));
+    }
+  };
+
+
+}
+
+function redeemGift(giftID){
+  var userID = localStorage.userID;
+  console.log("redeemGift "+userID+ " "+giftID);
+}
+function cancelGift(giftID){
+  var userID = localStorage.userID;
+  console.log("CancelGift "+userID+ " "+giftID);
 }
