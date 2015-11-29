@@ -428,11 +428,13 @@ function openGiftPanel(giftID){
         $('.redeemGift').on('click', function(){
           redeemGift(localStorage.giftID);
           $('.giftBox').animate({opacity:0},200,function(){$(".giftBox").css("display","none");});
+          setTimeout(function(){updateUserInformation(localStorage.username)},1000);
         });
         $('.cancelGift').off('click');
         $('.cancelGift').on('click', function(){
           cancelGift(localStorage.giftID);
           $('.giftBox').animate({opacity:0},200,function(){$(".giftBox").css("display","none");});
+          setTimeout(function(){updateUserInformation(localStorage.username)},1000);
         });
       }else{
         alert(msg.info);
@@ -452,7 +454,6 @@ function redeemGift(giftID){
     success: function(msg){
       if(msg.result){
         alert(msg.info);
-        updateUserInformation(localStorage.username);
       }else{
         alert(msg.info);
       }
@@ -471,7 +472,6 @@ function cancelGift(giftID){
     success: function(msg){
       if(msg.result){
         alert(msg.info);
-        updateUserInformation(localStorage.username);
       }else{
         alert(msg.info);
       }
