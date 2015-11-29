@@ -22,8 +22,9 @@ $numberOfRecord=mysql_num_rows($result2);
 
 //$compare=strcmp($friend, $row2['username']);
 if($numberOfRecord>0){
- $query3="INSERT INTO Friends (userID, friends) VALUES ($userID, $friend)";
+ $query3="INSERT INTO Friends VALUES ('$userID', '$friend')";
  $result3=mysql_query($query3);
+// echo mysql_error($connect);
  echo "0";
 }
  else {
