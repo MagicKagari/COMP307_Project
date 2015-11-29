@@ -34,6 +34,7 @@ function displayProducts(data) {
           var productDescription = document.createElement('h5');
           var productPrice = document.createElement('h6');
           var sendBtn = document.createElement('input');
+          var productID = document.createElement('h5');
 
 
           column.className = "col-md-3 col-sm-3";
@@ -42,6 +43,7 @@ function displayProducts(data) {
           productTitle.className = "productTitle";
           productDescription.className = "productDescription";
           sendBtn.className = "addToCart";
+          productID.className = "productID"
 
           productImage.setAttribute('src', "img/"+data[i*4 + col].img);
           productTitle.innerHTML = data[i*4 + col].productName;
@@ -49,12 +51,14 @@ function displayProducts(data) {
           productPrice.innerHTML = "$"+data[i*4 + col].price;
           sendBtn.value= "ADD TO CART";
           sendBtn.type="submit";
+          productID.innerHTML = data[i*4 + col].productID;
 
           productBox.appendChild(productImage);
           productBox.appendChild(productTitle);
           productBox.appendChild(productDescription);
           productBox.appendChild(productPrice);
           productBox.appendChild(sendBtn);
+          productBox.appendChild(productID);
 
           column.appendChild(productBox);
           row.appendChild(column);
@@ -74,7 +78,7 @@ function displayProducts(data) {
         var productDescription = document.createElement('h5');
         var productPrice = document.createElement('h6');
         var sendBtn = document.createElement('input');
-
+        var productID = document.createElement('h5');
 
         column.className = "col-md-3 col-sm-3";
         productBox.className = "productBox";
@@ -82,6 +86,7 @@ function displayProducts(data) {
         productTitle.className = "productTitle";
         productDescription.className = "productDescription";
         sendBtn.className = "addToCart";
+        productID.className = "productID";
 
         productImage.setAttribute('src', "img/"+data[(runTimes -1)*4+j].img);
         productTitle.innerHTML = data[(runTimes -1)*4+j].productName;
@@ -89,12 +94,14 @@ function displayProducts(data) {
         productPrice.innerHTML = "$"+data[(runTimes -1)*4+j].price;
         sendBtn.value= "ADD TO CART";
         sendBtn.type="submit";
+        productID.innerHTML = data[(runTimes -1)*4+j].productID;
 
         productBox.appendChild(productImage);
         productBox.appendChild(productTitle);
         productBox.appendChild(productDescription);
         productBox.appendChild(productPrice);
         productBox.appendChild(sendBtn);
+        productBox.appendChild(productID);
 
         column.appendChild(productBox);
         row.appendChild(column);
@@ -134,6 +141,8 @@ $( document ).ready(function() {
     $(".productPageDescription").text($description);
     var $src = $(this).siblings(".productImage").attr("src");
     $(".productPageImage").attr("src", $src);
+    var $ID = $(this).siblings(".productID").text();
+    $(".productPageID").text($ID);
     $(".lightbox").css("display","block");
     $(".lightbox").animate({opacity:1},400);
   });
@@ -270,6 +279,7 @@ function updateUserInformation(username){
       var ret = msg.result;
       if(ret){
         localStorage.username = username;
+        localStorage.userID = msg.info.userid;
         localStorage.userinfo = JSON.stringify(msg.info);
         $("#userinfo-name").text(localStorage.username);
         $("#userinfo-id").text(msg.info.userid);
@@ -277,36 +287,43 @@ function updateUserInformation(username){
         $("#userinfo-credits").text('$'+msg.info.credits);
         $("#userinfo-presents").text(msg.info.numberOfPresents);
         localStorage.friendList = JSON.stringify(msg.info.friendList);
-        console.log(localStorage.friendList);
         var giftBox = $("#giftBox");
         giftBox.empty();
-        for(var i=0; i<msg.info.giftList.length; i++){
+        for(var i=0; i<msg.info.giftList.length && i<3; i++){
           var gift = msg.info.giftList[i];
           var giftEntry = document.createElement('li');
           giftEntry.className = "list-group-item";
           giftEntry.innerHTML = gift.username+" send you a gift "+gift.giftID;
+          giftEntry.onclick = function(){
+              var giftID = gift.giftID;
+
+          }
           giftBox.append(giftEntry);
         }
       }else{
         alert(username + JSON.stringify(msg));
       }
+      $(".sendToFriend").text("Send To Friend");
+      var friendList = JSON.parse(localStorage.friendList);
+      for(var i = 0; i< friendList.length; i++)
+      {
+        $("#sel1").append($('<option>', {
+            value: friendList[i].username,
+            text: friendList[i].username
+        }));
+      }
+
     },
     error: function(error){
       alert(JSON.stringify(error));
     }
   });
 }
-/*
-function logout(){
-  localStorage.removeItem('userinfo');
-  localStorage.removeItem('username');
-  localStorage.removeItem('currentSession');
-  localStorage.removeItem('isLoggedIn');
-  localStorage.removeItem('firendList');
-  location.reload();
-
-}
-*/
+$(".sendToFriend").click(function(){
+  var selectedFriend = $("#sel1").find(":selected").text();
+  var productID = $(".productPageID").text();
+  sendGift(productID, selectedFriend);
+});
 function logout(){
 	
 	var sessionID=localStorage.getItem("currentSession");
@@ -347,8 +364,64 @@ function logout(){
 	}
 
 
-function sendGift(){
+function sendGift(productID, toWhoName){
+  var friendList = JSON.parse(localStorage.friendList);
+  var toWhoID;
+  for(var i =0; i<friendList.length;i++){
+    if(friendList[i].username === toWhoName) toWhoID = friendList[i].userID;
+  }
+  if(toWhoID == null){
+    alert("Invalid toWhoName");
+    return;
+  }
+  var fromWhoID = localStorage.userID;
+  console.log(productID + " to:" + toWhoID + " from:" + fromWhoID);
+  var send = {'product':productID,'toWho':toWhoID,'fromWho':fromWhoID};
+  $.ajax({
+    url:"http://159.203.18.55:1337/node/gifts/sendGift",
+    type:"POST",
+    data: JSON.stringify(send),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg){
+      if(msg.result){
+        alert('gift send successful');
+      }else{
+        alert(msg.info);
+      }
+    },
+    error: function(error){
+      alert(JSON.stringify(error));
+    }
+  });
+}
 
+function openGiftPanel(giftID){
+  $.ajax({
+    url:"http://159.203.18.55:1337/node/gifts/getGift",
+    type:"POST",
+    data: JSON.stringify({'giftid':giftID}),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg){
+      if(msg.result){
+        var productInfo = msg.info;
+        alert(JSON.stringify(productInfo));
+      }else{
+        alert(msg.info);
+      }
+    },
+    error: function(error){
+      alert(JSON.stringify(error));
+    }
+  });
+}
 
-
+function redeemGift(giftID){
+  var userID = localStorage.userID;
+  console.log("redeemGift "+userID+ " "+giftID);
+}
+function cancelGift(giftID){
+  var userID = localStorage.userID;
+  console.log("CancelGift "+userID+ " "+giftID);
 }

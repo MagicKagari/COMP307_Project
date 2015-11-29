@@ -156,7 +156,13 @@ overflow-x: hidden;
     display: none;
     height: 0px;
 }
-
+#friendname{
+    width: 190px;
+    display: inline-block;
+}
+#addFriendBtn{
+    display: inline-block;
+}
 .addFriend .list-group-item{
     padding: 3px;
 }
@@ -203,7 +209,9 @@ overflow-x: hidden;
 }
 .productTitle{
     display: inline-block;
-    
+}
+.productID{
+    display: none;
 }
 .gallery .col-md-3:hover{
     border: 2px solid rgb(21,164,160);
@@ -250,7 +258,7 @@ overflow-x: hidden;
 .productPage{
     position:fixed;
     width: 50%;
-    min-height: 300px;
+    min-height: 400px;
     height: 40%;
     background: white;
     top: 50%;
@@ -266,8 +274,13 @@ overflow-x: hidden;
 .productPageTitle{
     font-size: 40px;
 }
+.productPageImage{
+    position: fixed;
+    top:50%;
+    width: 30%;
+    transform: translate(0%, -50%);
 
-
+}
 .sendToFriend{
     width: 200px;
     padding: 8px 20px;

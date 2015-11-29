@@ -253,3 +253,17 @@ exports.checkGift = function(req, resp){
     }
   });
 };
+
+//function that returns the datail of gift (like getProduct)
+exports.getGift = function(req, resp){
+  var giftid = req.body.giftid;
+  var query = "SELECT * FROM Product WHERE productID IN ( SELECT productID FROM Gifts WHERE giftID='"+giftid+"')";
+  connection.query(query, function(err, rows, fields){
+    if(err) throw err;
+    if(rows.length == 0){
+      resp.send({'result':false, 'info':'oops no such thing'});
+    }else{
+      resp.send({'result':true, 'info':rows[0]});
+    }
+  });
+};

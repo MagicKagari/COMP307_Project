@@ -28,7 +28,14 @@
                     <div class="col-md-8">
                         <h1 class="productPageTitle">Title Name</h1>
                         <h3 class="productPageDescription">Description</h3>
-                        <button class="sendToFriend">Send to Friend</button>
+                        <h5 style="display:none" class="productPageID"></h5>
+                        <hr>
+                        <div class="form-group">
+                          <label for="sel1">Select friend:</label>
+                          <select class="form-control" id="sel1">
+                          </select>
+                        </div>
+                        <button class="sendToFriend">Please Log in</button>
                     </div>
                 </div>
             </div>
@@ -95,23 +102,14 @@
                             </ul>
                         </div>
 
-                        <ul class="list-group" style="border:1px solid rgb(47,121,181);border-radius: 3px">
-                          <li class="list-group-item">
-                            <span class="badge">0</span>
-                            Show All Notifications
-                          </li>
-                        </ul>
-
                         <div class="panel panel-primary addFriend">
                         <!-- Default panel contents -->
-                        FriendName:<input id="friendname" type="text"><br>
-                        <input type="submit" value="submit" onclick="checkFriend()">
                         <div class="panel-heading">Add Friend</div>
                           <ul class="list-group">
                               <li class="list-group-item">
                                 <div class="form-group has-feedback">
-                                    <input class="form-control" type="text" placeholder="Enter Friend's Name">
-                                    <i class="form-control-feedback glyphicon glyphicon-plus-sign"></i>
+                                    <input class="form-control" id="friendname" type="text" placeholder="Enter Friend's Name">
+                                    <input type="submit" class="btn btn-primary" id="addFriendbtn" value="submit" onclick="checkFriend()">
                                 </div>
                               </li>
                           </ul>
