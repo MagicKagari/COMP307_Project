@@ -34,6 +34,7 @@ function displayProducts(data) {
           var productDescription = document.createElement('h5');
           var productPrice = document.createElement('h6');
           var sendBtn = document.createElement('input');
+          var productID = document.createElement('h5');
 
 
           column.className = "col-md-3 col-sm-3";
@@ -42,6 +43,7 @@ function displayProducts(data) {
           productTitle.className = "productTitle";
           productDescription.className = "productDescription";
           sendBtn.className = "addToCart";
+          productID.className = "productID"
 
           productImage.setAttribute('src', "img/"+data[i*4 + col].img);
           productTitle.innerHTML = data[i*4 + col].productName;
@@ -49,12 +51,14 @@ function displayProducts(data) {
           productPrice.innerHTML = "$"+data[i*4 + col].price;
           sendBtn.value= "ADD TO CART";
           sendBtn.type="submit";
+          productID.innerHTML = data[i*4 + col].productID;
 
           productBox.appendChild(productImage);
           productBox.appendChild(productTitle);
           productBox.appendChild(productDescription);
           productBox.appendChild(productPrice);
           productBox.appendChild(sendBtn);
+          productBox.appendChild(productID);
 
           column.appendChild(productBox);
           row.appendChild(column);
@@ -74,7 +78,7 @@ function displayProducts(data) {
         var productDescription = document.createElement('h5');
         var productPrice = document.createElement('h6');
         var sendBtn = document.createElement('input');
-
+        var productID = document.createElement('h5');
 
         column.className = "col-md-3 col-sm-3";
         productBox.className = "productBox";
@@ -82,6 +86,7 @@ function displayProducts(data) {
         productTitle.className = "productTitle";
         productDescription.className = "productDescription";
         sendBtn.className = "addToCart";
+        productID.className = "productID";
 
         productImage.setAttribute('src', "img/"+data[(runTimes -1)*4+j].img);
         productTitle.innerHTML = data[(runTimes -1)*4+j].productName;
@@ -89,12 +94,14 @@ function displayProducts(data) {
         productPrice.innerHTML = "$"+data[(runTimes -1)*4+j].price;
         sendBtn.value= "ADD TO CART";
         sendBtn.type="submit";
+        productID.innerHTML = data[(runTimes -1)*4+j].productID;
 
         productBox.appendChild(productImage);
         productBox.appendChild(productTitle);
         productBox.appendChild(productDescription);
         productBox.appendChild(productPrice);
         productBox.appendChild(sendBtn);
+        productBox.appendChild(productID);
 
         column.appendChild(productBox);
         row.appendChild(column);
@@ -134,6 +141,8 @@ $( document ).ready(function() {
     $(".productPageDescription").text($description);
     var $src = $(this).siblings(".productImage").attr("src");
     $(".productPageImage").attr("src", $src);
+    var $ID = $(this).siblings(".productID").text();
+    $(".productPageID").text($ID);
     $(".lightbox").css("display","block");
     $(".lightbox").animate({opacity:1},400);
   });
@@ -294,13 +303,29 @@ function updateUserInformation(username){
       }else{
         alert(username + JSON.stringify(msg));
       }
+      $(".sendToFriend").text("Send To Friend");
+      var friendList = JSON.parse(localStorage.friendList);
+      for(var i = 0; i< friendList.length; i++)
+      {
+        $("#sel1").append($('<option>', {
+            value: friendList[i].username,
+            text: friendList[i].username
+        }));
+      }
+
     },
     error: function(error){
       alert(JSON.stringify(error));
     }
   });
 }
+$(".sendToFriend").click(function(){
+  var selectedFriend = $("#sel1").find(":selected").text();
+  var productID = $(".productPageID").text();
+  alert(selectedFriend + " " + productID);
 
+
+});
 function logout(){
   localStorage.removeItem('userinfo');
   localStorage.removeItem('username');
