@@ -12,7 +12,7 @@ if('undefined' === typeof notification){
 //Poll our backend for notifications, set some reasonable timeout for your application
 
 window.setInterval(function() {
-  if(localStorage.isLoggedIn){
+  if(localStorage.isLoggedIn == true){
     $.ajax({
       url:"http://159.203.18.55:1337/node/gifts/checkGift",
       //url:"http://localhost:1337/node/gifts/checkGift",
@@ -27,8 +27,6 @@ window.setInterval(function() {
               Notifier.info("New gift for you", "User: " + msg.info[i].fromWhoName + " GiftID: " + msg.info[i].giftID);
             }
         }
-      },
-      error: function(error){
       }
     });
   }else return;

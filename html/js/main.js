@@ -4,9 +4,6 @@ $.ajax({
    data: {
       format: 'string'
    },
-   error: function() {
-     alert("not working");
-   },
    dataType: 'json',
    success: function(data) {
       displayProducts(data);   },
@@ -337,10 +334,6 @@ function updateUserInformation(username){
             text: friendList[i].username
         }));
       }
-
-    },
-    error: function(error){
-      alert(JSON.stringify(error));
     }
   });
 }
@@ -407,9 +400,6 @@ function sendGift(productID, toWhoName){
       }else{
         alert(msg.info);
       }
-    },
-    error: function(error){
-      alert(JSON.stringify(error));
     }
   });
   updateUserInformation(localStorage.username);
@@ -447,9 +437,6 @@ function openGiftPanel(giftID){
       }else{
         alert(msg.info);
       }
-    },
-    error: function(error){
-      alert(JSON.stringify(error));
     }
   });
 }
@@ -469,9 +456,6 @@ function redeemGift(giftID){
       }else{
         alert(msg.info);
       }
-    },
-    error: function(error){
-      alert(JSON.stringify(error));
     }
   });
 }
@@ -491,9 +475,6 @@ function cancelGift(giftID){
       }else{
         alert(msg.info);
       }
-    },
-    error: function(error){
-      alert(JSON.stringify(error));
     }
   });
 }
