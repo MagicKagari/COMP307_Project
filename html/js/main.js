@@ -154,12 +154,26 @@ $( document ).ready(function() {
   //****************************************
   $(".lightbox").click(function(){
     $(this).animate({opacity:0},200,function(){$(this).css("display","none");});
+    $(".sendToFriend").animate({opacity:1},100,function(){
+      $(".sendToFriend").css("display","block");
+      $("#sendCheck").text("");
+      updateUserInformation(localStorage.username);
+      });
   });
   //******************************************
   //Close popup if user clicks on close button
   //******************************************
   $(".lightbox .closeButton").click(function(){
-    $(".lightbox").animate({opacity:0},200,function(){$(".lightbox").css("display","none");});
+    $(".lightbox").animate({opacity:0},200,function(){
+      $(".lightbox").css("display","none");
+
+      $(".sendToFriend").animate({opacity:1},100,function(){
+      $(".sendToFriend").css("display","block");
+      $("#sendCheck").text("");
+      });
+
+
+      });
   });
 
   $(".loginBtn").click(function (){
@@ -370,7 +384,6 @@ function logout(){
       if (xhttp.readyState == 4 && xhttp.status == 200) {
       	var check= xhttp.responseText;
 				 if(check==0){
-  					window.alert("Successful logout!");
 				 	   localStorage.removeItem('userinfo');
 					   localStorage.removeItem('username');
  					   localStorage.removeItem('currentSession');
@@ -411,9 +424,16 @@ function sendGift(productID, toWhoName){
     dataType: "json",
     success: function(msg){
       if(msg.result){
-        alert('gift send successful');
+        $(".sendToFriend").animate({opacity:0},100,function(){
+          $(".sendToFriend").css("display","none");
+          $("#sendCheck").text("Your gift was sent successfully.");
+        });
+        
       }else{
-        alert(msg.info);
+        $(".sendToFriend").animate({opacity:0},100,function(){
+          $(".sendToFriend").css("display","none");
+          $("#sendCheck").text(msg.info);
+        });
       }
     }
   });
@@ -481,7 +501,7 @@ function redeemGift(giftID){
     dataType: "json",
     success: function(msg){
       if(msg.result){
-        alert(msg.info);
+        alert("Your gift has been redeemed. It is now on the way!");
       }else{
         alert(msg.info);
       }
@@ -499,7 +519,7 @@ function cancelGift(giftID){
     dataType: "json",
     success: function(msg){
       if(msg.result){
-        alert(msg.info);
+        alert("Your gift has been exchanged for credit.");
       }else{
         alert(msg.info);
       }
