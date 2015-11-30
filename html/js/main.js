@@ -314,10 +314,25 @@ function updateUserInformation(username){
           giftIDEntry.className = "list-group-item-id"
           giftIDEntry.innerHTML = gift.giftID;
           giftIDEntry.style.display = "none";
+
+
           giftEntry.onclick = function(){
             var giftID = $(this).children('.list-group-item-id').text();
+            
             openGiftPanel(giftID);
+            var scrollTop     = $(window).scrollTop();
+            var elementOffset = $(this).offset().top;
+            var distance      = (elementOffset - scrollTop);
+            $(".notificationBubble").css("top",distance-150);
+            $(".notificationBubble").css("display","block");
+            $(".notificationBubble").animate({opacity:1},100,function(){});            
+
+            
+            
+            
           }
+
+
           giftBox.append(giftEntry);
           giftEntry.appendChild(giftIDEntry);
         }
@@ -416,6 +431,8 @@ function openGiftPanel(giftID){
     success: function(msg){
       if(msg.result){
         var productInfo = msg.info;
+
+        /*
         $('.giftBox').animate({opacity:1},200,function(){$(".giftBox").css("display","inline");});
         $('.giftBox .closeButton').click(function(){
           $('.giftBox').animate({opacity:0},200,function(){$(".giftBox").css("display","none");});
@@ -424,16 +441,27 @@ function openGiftPanel(giftID){
         $('.giftBox .productPageTitle').text(productInfo.productName);
         $('.giftBox .productPageDescription').text(productInfo.description);
         $('.giftBox .productPrice').text("$"+productInfo.price);
+        */
+        $(".closePopup").click(function(){
+          $('.notificationBubble').animate({opacity:0},400,function(){});
+        });
+
+        $(".notificationTitle").text(productInfo.productName);
+        $(".notificationDescription").text(productInfo.description);
+        $(".notificationPicture").attr("src","img/"+productInfo.img);
+
+
+
         $('.redeemGift').off('click');
         $('.redeemGift').on('click', function(){
           redeemGift(localStorage.giftID);
-          $('.giftBox').animate({opacity:0},200,function(){$(".giftBox").css("display","none");});
+          $('.notificationBubble').animate({opacity:0},200,function(){$(".notificationBubble").css("display","none");});
           setTimeout(function(){updateUserInformation(localStorage.username)},1000);
         });
         $('.cancelGift').off('click');
         $('.cancelGift').on('click', function(){
           cancelGift(localStorage.giftID);
-          $('.giftBox').animate({opacity:0},200,function(){$(".giftBox").css("display","none");});
+          $('.notificationBubble').animate({opacity:0},200,function(){$(".notificationBubble").css("display","none");});
           setTimeout(function(){updateUserInformation(localStorage.username)},1000);
         });
       }else{
