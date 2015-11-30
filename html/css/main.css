@@ -291,13 +291,17 @@ overflow-x: hidden;
     color: rgb(0,55,100);
     margin-top: 10px;
     font-size: 18px;
+    display: inline-block;
 
 }
 .sendToFriend:hover{
     background: rgb(21,164,160);
     color: white;
 }
-
+#sendCheck{
+    display: inline-block;
+    font-size: 20px;
+}
 .closeButton{
     position: absolute;
     right: 0;
@@ -411,6 +415,13 @@ overflow-x: hidden;
     position: absolute;
     width: 1px;
 }
+#friendCheck{
+    list-style: none;
+    padding:5px 20px;
+    font-weight: 200;
+   
+}
+
 
 /*
  * Extends the .visuallyhidden class to allow the element

@@ -16,10 +16,10 @@ function checkFriend(){
 
       				 if(check==0){
       				 	updateUserInformation(localStorage.username);
-      				 	window.alert("FRIEND ADDED");
+      				 	$("#friendCheck").text("Friend added!");
       				 }
       				 else{
-      				 	window.alert("TRY DIFFERENT FRIEND");
+      				 	$("#friendCheck").text("Friend does not exist. Try again.");
       				 }
 
 					}
